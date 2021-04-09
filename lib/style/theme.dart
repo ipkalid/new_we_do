@@ -41,6 +41,7 @@ const kButtonTextStyle =
 
 class AppTheme {
   static ThemeData customerTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       centerTitle: true,
       elevation: 0,

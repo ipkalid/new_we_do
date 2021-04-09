@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/screens/0_auth_screens/terms_and_conditions.dart';
@@ -14,10 +15,7 @@ class VertificationScreen extends StatefulWidget {
 }
 
 class _VertificationScreenState extends State<VertificationScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  String otbToken;
 
   @override
   void initState() {
@@ -33,32 +31,42 @@ class _VertificationScreenState extends State<VertificationScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // PinCodeTextField(
-            //   enableActiveFill: true,
-            //   animationType: AnimationType.fade,
-            //   pinTheme: PinTheme(
-            //     shape: PinCodeFieldShape.box,
-            //     borderRadius: BorderRadius.circular(6),
-            //     fieldHeight: 58,
-            //     fieldWidth: 64,
-            //     selectedColor: Colors.transparent,
-            //     //selectedFillColor: kTextFiieldBackgroundColor,
-            //     inactiveFillColor: Colors.transparent,
-            //     inactiveColor: Colors.grey,
-            //     activeColor: Colors.transparent,
-            //     //activeFillColor: kTextFiieldBackgroundColor,
-            //   ),
-            //   length: 4,
-            //   appContext: context,
-            //   onChanged: (String value) {
-            //     code = value;
-            //   },
-            // ),
-
-            SizedBox(height: 32),
-            ActionButton(
-                label: "Sign Up", onPressed: () => print(nameController.text))
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Text(
+                "Vertification Code",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: PinCodeTextField(
+                enableActiveFill: true,
+                animationType: AnimationType.fade,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(8),
+                  fieldHeight: 50,
+                  fieldWidth: 62,
+                  borderWidth: 1,
+                  selectedColor: Color(0xffE8E8E8),
+                  selectedFillColor: Color(0xffF6F6F6),
+                  inactiveFillColor: Color(0xffF6F6F6),
+                  inactiveColor: Color(0xffE8E8E8),
+                  activeColor: Color(0xffE8E8E8),
+                  activeFillColor: Color(0xffF6F6F6),
+                ),
+                length: 4,
+                appContext: context,
+                onChanged: (String value) {
+                  otbToken = value;
+                },
+              ),
+            ),
+            SizedBox(height: 64),
+            ActionButton(label: "Sign Up", onPressed: () => print(otbToken))
           ],
         ),
       ),

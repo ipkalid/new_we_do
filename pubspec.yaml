@@ -33,7 +33,7 @@ dependencies:
   http: ^0.13.1
 
 #UI_ELEMENTS
-pin_code_fields: ^7.0.0
+  pin_code_fields: ^7.0.0
 
 
 dev_dependencies:

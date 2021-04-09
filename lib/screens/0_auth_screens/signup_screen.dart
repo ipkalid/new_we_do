@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: ListView(
           children: [
             RegularTextField(
               controller: nameController,
@@ -59,6 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(height: 32),
             Text(
               "By Sign Up You Agree to",
+              textAlign: TextAlign.center,
               style: TextStyleTheme.introOrangeText,
             ),
             TextButton(
