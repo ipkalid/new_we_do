@@ -3,6 +3,7 @@ import 'package:we_do/components/fab_bottom_app_bar/fab_bottom_app_bar.dart';
 import 'package:we_do/components/fab_bottom_app_bar/layout.dart';
 import 'package:we_do/helper/tab_navigator.dart';
 import 'package:we_do/screens/0_auth_screens/intro_screen.dart';
+import 'package:we_do/screens/1_customer_side/3_new_request/new_request_details_screen.dart';
 import 'package:we_do/style/color_theme.dart';
 
 class WeDoCustomerApp extends StatefulWidget {
@@ -109,9 +110,7 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
         highlightElevation: 0,
         disabledElevation: 0,
         backgroundColor: Colors.white,
-        onPressed: () {
-          print("object");
-        },
+        onPressed: () => goToNewRequest(),
         child: new LayoutBuilder(builder: (context, constraint) {
           return new Icon(
             Icons.add_circle_outline,
@@ -121,6 +120,14 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
         }),
         elevation: 2.0,
       ),
+    );
+  }
+
+  void goToNewRequest() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => NewRequstDetailsScreen(), fullscreenDialog: true),
     );
   }
 }
