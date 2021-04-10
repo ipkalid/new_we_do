@@ -66,6 +66,7 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
         return isFirstRouteInCurrentTab;
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             _buildOffstageNavigator("Offer"),
@@ -75,7 +76,6 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
           ],
         ),
         bottomNavigationBar: FABBottomAppBar(
-          centerItemText: '',
           color: Colors.grey,
           selectedColor: ColorTheme.kOrange,
           notchedShape: CircularNotchedRectangle(),
@@ -106,6 +106,8 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
         );
       },
       child: FloatingActionButton(
+        highlightElevation: 0,
+        disabledElevation: 0,
         backgroundColor: Colors.white,
         onPressed: () {
           print("object");

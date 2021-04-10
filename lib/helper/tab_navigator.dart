@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/screens/1_customer_side/1_offer_screens/offer_screen.dart';
 import 'package:we_do/screens/1_customer_side/2_my_order_screens/my_order_screen.dart';
-import 'package:we_do/screens/1_customer_side/3_history_screens/history_screen.dart';
-import 'package:we_do/screens/1_customer_side/4_profile_screen/account_screen.dart';
+import 'package:we_do/screens/1_customer_side/4_history_screens/history_screen.dart';
+import 'package:we_do/screens/1_customer_side/5_profile_screen/account_screen.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';

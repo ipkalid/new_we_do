@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:we_do/screens/1_customer_side/1_offer_screens/offer_search.dart';
+
+import 'filter_screen.dart';
 
 class OfferScreen extends StatefulWidget {
   OfferScreen({Key key}) : super(key: key);
@@ -8,6 +11,7 @@ class OfferScreen extends StatefulWidget {
 }
 
 class _OfferScreenState extends State<OfferScreen> {
+  var _filterdData;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,16 +21,12 @@ class _OfferScreenState extends State<OfferScreen> {
           IconButton(
             icon: Icon(Icons.search),
             tooltip: 'Search',
-            onPressed: () {
-              // handle the press
-            },
+            onPressed: () => _goToSearch(),
           ),
           IconButton(
             icon: Icon(Icons.filter_list),
-            tooltip: 'Show Lost',
-            onPressed: () {
-              // handle the press
-            },
+            tooltip: 'Filter',
+            onPressed: () => _goToFilterScreen(),
           ),
         ],
       ),
@@ -34,5 +34,22 @@ class _OfferScreenState extends State<OfferScreen> {
         child: Text("MyOfferScreen"),
       ),
     );
+  }
+
+  _goToFilterScreen() async {
+    final filterData = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FilterScreen(),
+        fullscreenDialog: true,
+      ),
+    );
+    _filterdData = filterData;
+    print(_filterdData);
+  }
+
+  _goToSearch() async {
+    showSearch(
+        context: context, delegate: OfferSearch(filterdData: _filterdData));
   }
 }

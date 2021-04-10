@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.1
 
 #UI_ELEMENTS
+  group_button: ^2.1.0
   pin_code_fields: ^7.0.0
 
 
