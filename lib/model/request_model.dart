@@ -127,3 +127,13 @@ class Request {
     return allRequests;
   }
 }
+
+
+var requestttt = Request(
+  customerID: "customerID",
+  requestID: "requestID",
+  addressID: "addressID",
+  deliveryTime: "deliveryTime",
+  deliverFrom: "deliverFrom",
+  description: "description",
+);

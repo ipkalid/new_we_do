@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_do/components/helper/custom_button_sheet.dart';
 
 class HelperMethods {
   static void showDialogAlert({
@@ -37,5 +38,25 @@ class HelperMethods {
       ),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  static void showBottomSheet(
+      {@required BuildContext context,
+      @required Widget child,
+      double height = 0.5}) {
+    showModalBottomSheet(
+      enableDrag: true,
+      isDismissible: true,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(32),
+        ),
+      ),
+      context: context,
+      builder: (ctx) {
+        return CustomBottomSheet(child: child, height: height);
+      },
+    );
   }
 }

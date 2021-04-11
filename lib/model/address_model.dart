@@ -29,3 +29,14 @@ class Address {
     description = json["description"];
   }
 }
+
+//only for testing 
+var adresstst = Address(
+    customerID: "Dd",
+    addressID: "ss",
+    name: "KFUPM",
+    latitude: "12282882",
+    longitude: "222222",
+    buildingNo: "822",
+    room: "022",
+    description: "my home");

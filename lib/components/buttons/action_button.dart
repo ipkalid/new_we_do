@@ -25,7 +25,7 @@ class ActionButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: active ? color : Colors.grey,
         boxShadow: hideShadow ? [] : [kBoxShadow],
-        borderRadius: BorderRadius.all(Radius.circular(6)),
+        borderRadius: BorderRadius.all(Radius.circular(14)),
       ),
       child: TextButton(
         onPressed: active ? onPressed : null,

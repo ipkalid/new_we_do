@@ -106,7 +106,11 @@ class _NewRequstDetailsScreenState extends State<NewRequstDetailsScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => NewRequestLocationScreen(),
+        builder: (context) => NewRequestLocationScreen(
+            category: category,
+            details: detailsController.text,
+            place: placeController.text,
+            time: timeController.text),
       ),
     );
   }

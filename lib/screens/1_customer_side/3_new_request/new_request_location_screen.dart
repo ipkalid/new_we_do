@@ -3,10 +3,16 @@ import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/buttons/select_button.dart';
 import 'package:we_do/components/helper/helper_method.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
+import 'package:we_do/components/widgets/address_related/address_card.dart';
+import 'package:we_do/model/address_model.dart';
+import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 
 class NewRequestLocationScreen extends StatefulWidget {
   NewRequestLocationScreen(
-      {this.category, this.place, this.time, this.details});
+      {@required this.category,
+      @required this.place,
+      @required this.time,
+      @required this.details});
   final String category;
   final String place;
   final String time;
@@ -18,10 +24,11 @@ class NewRequestLocationScreen extends StatefulWidget {
 }
 
 class _NewRequestLocationScreenState extends State<NewRequestLocationScreen> {
-  TextEditingController locationNameController = TextEditingController();
   TextEditingController buldingController = TextEditingController();
   TextEditingController roomController = TextEditingController();
-  TextEditingController detailsController = TextEditingController();
+  TextEditingController couponController = TextEditingController();
+
+  Address _selectedAddress;
 
   String location = "Select Location";
   bool locationSelected = false;
@@ -40,7 +47,7 @@ class _NewRequestLocationScreenState extends State<NewRequestLocationScreen> {
             label: location,
             isSelected: locationSelected,
             onPressed: () {
-              // _selectCategory();
+              selectAddress(context);
             },
           ),
           Padding(
@@ -71,13 +78,8 @@ class _NewRequestLocationScreenState extends State<NewRequestLocationScreen> {
               ),
             ),
           ),
-          Text("New Location", style: TextStyle(fontSize: 18)),
+          Text("Enter your location", style: TextStyle(fontSize: 18)),
           SizedBox(height: 16),
-          RegularTextField(
-            label: "Name",
-            controller: locationNameController,
-            withLabel: true,
-          ),
           RegularTextField(
             label: "Bulding",
             controller: buldingController,
@@ -90,22 +92,47 @@ class _NewRequestLocationScreenState extends State<NewRequestLocationScreen> {
             withLabel: true,
           ),
           SizedBox(height: 30),
-          Text(
-            "Add coupon",
-            //  style: labelStyle(context),
+          Padding(
+            padding: const EdgeInsets.only(left: 8, bottom: 4),
+            child: Text(
+              "Add Coupon",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
           ),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: RegularTextField(
-          //         label: "Bulding",
-          //         controller: buldingController,
-          //       ),
-          //     ),
-          //     SizedBox(width: 16),
-          //     ActionButton(onPressed: () => print("d"), label: "Apply")
-          //   ],
-          // ),
+          Container(
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: RegularTextField(
+                    controller: couponController,
+                    label: "coupon",
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  flex: 1,
+                  child: ActionButton(
+                    label: "Apply",
+                    onPressed: () {
+                      if (couponController.text == "") {
+                        HelperMethods.showDialogAlert(
+                            context: context,
+                            title: "Error",
+                            message: "Enter a coupon First");
+                      }
+                    },
+                  ),
+                )
+                // RegularTextField(
+                //   label: "coupon",
+                //   controller: buldingController,
+                // ),
+                // SizedBox(width: 16),
+                //ActionButton(onPressed: () => print("d"), label: "Apply")
+              ],
+            ),
+          ),
           SizedBox(height: 30),
           ActionButton(
             label: 'Send Request',
@@ -130,12 +157,33 @@ class _NewRequestLocationScreenState extends State<NewRequestLocationScreen> {
           context: context, title: "Error", message: "Room shoud not be empty");
       return;
     }
-    if (detailsController.text == "") {
-      HelperMethods.showDialogAlert(
-          context: context, title: "Error", message: "Enter a Place First");
-      return;
-    }
 
     Navigator.pop(context);
+    Navigator.pop(context);
+  }
+
+  void selectAddress(BuildContext context) {
+    HelperMethods.showBottomSheet(
+      context: context,
+      child: Expanded(
+        child: ListView(
+          children: [
+            AddressCard(
+              address: adresstst,
+              toScreen: false,
+              onTap: (value) {
+                _selectedAddress = value;
+                setState(() {
+                  location = _selectedAddress.name;
+                  locationSelected = true;
+                });
+
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

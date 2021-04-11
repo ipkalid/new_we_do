@@ -55,5 +55,12 @@ class AppTheme {
         ),
       ),
     ),
+    tabBarTheme: TabBarTheme(
+      labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+      unselectedLabelStyle:
+          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+      labelColor: Colors.black,
+      unselectedLabelColor: Colors.grey,
+    ),
   );
 }

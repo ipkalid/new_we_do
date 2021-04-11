@@ -1,3 +1,5 @@
+import 'package:we_do/model/customer_model.dart';
+
 import 'driver_model.dart';
 import 'network_helper.dart';
 import 'request_model.dart';
@@ -178,3 +180,12 @@ class Offer {
     return allOffer;
   }
 }
+
+var offereeeee = Offer(
+  deliveryPrice: 33,
+  driver: Driver(
+    customer: Customer(
+      name: "ddd",
+    ),
+  ),
+);
