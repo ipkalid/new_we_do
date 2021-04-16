@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:we_do/components/buttons/action_button.dart';
-import 'package:we_do/components/text_field/regular%20text_field.dart';
-import 'package:we_do/screens/0_auth_screens/terms_and_conditions.dart';
-import 'package:we_do/style/text_style_theme.dart';
 
 class VertificationScreen extends StatefulWidget {
   static const routeName = '/signup-screen';

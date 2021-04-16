@@ -72,7 +72,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   goToWeDoCustomerApp() async {
-    print("object");
     Navigator.of(context).pushNamedAndRemoveUntil(
         WeDoCustomerApp.routeName, (Route<dynamic> route) => false);
   }
