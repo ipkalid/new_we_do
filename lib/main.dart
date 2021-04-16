@@ -25,7 +25,7 @@ class WeDoMain extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       //home: TestClass(),
-      initialRoute: WeDoCustomerApp.routeName,
+      initialRoute: IntroScreen.routeName,
       // initialRoute: global.route,
       routes: {
         IntroScreen.routeName: (context) => IntroScreen(),

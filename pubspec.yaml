@@ -35,6 +35,8 @@ dependencies:
 #UI_ELEMENTS
   group_button: ^2.1.0
   pin_code_fields: ^7.0.0
+  timeline_tile: ^2.0.0
+
 
 
 dev_dependencies:

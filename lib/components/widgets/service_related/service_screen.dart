@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
-import 'package:we_do/components/widgets/offer_related/offer_card.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/offer_card.dart';
+import 'package:we_do/components/widgets/service_related/track_screen.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/service_model.dart';
 
@@ -163,7 +164,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         label: "Track",
                         hideShadow: true,
                         color: Color(0xff7DAD40),
-                        onPressed: () {},
+                        onPressed: () => _goToTrackScreen(),
                       ),
                     ),
                     SizedBox(width: 32),
@@ -182,6 +183,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  void _goToTrackScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ServiceTrackScreen(
+          service: widget.service,
+        ),
       ),
     );
   }

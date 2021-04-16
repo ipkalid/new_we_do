@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/components/widgets/service_related/request_screen.dart';
+import 'package:we_do/components/widgets/service_related/request_related/request_screen.dart';
 import 'package:we_do/components/widgets/service_related/service_screen.dart';
 import 'package:we_do/model/request_model.dart';
 import 'package:we_do/model/service_model.dart';
@@ -53,7 +53,9 @@ class RequestCard extends StatelessWidget {
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
                     ),
                     Text(
-                      "12:00",
+                      (service == null)
+                          ? request.deliveryTime
+                          : service.request.deliveryTime,
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
                     ),

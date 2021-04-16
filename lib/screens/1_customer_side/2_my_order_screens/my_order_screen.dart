@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/components/widgets/service_related/request_card.dart';
+import 'package:we_do/components/widgets/service_related/request_related/request_card.dart';
 import 'package:we_do/model/request_model.dart';
 import 'package:we_do/model/service_model.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
-import 'package:we_do/components/widgets/offer_related/offer_card.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/offer_card.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/request_model.dart';
 

@@ -3,6 +3,7 @@ import 'package:we_do/components/buttons/setting_button.dart';
 
 class AccountScreen extends StatefulWidget {
   AccountScreen({Key key}) : super(key: key);
+  
 
   @override
   _AccountScreenState createState() => _AccountScreenState();
