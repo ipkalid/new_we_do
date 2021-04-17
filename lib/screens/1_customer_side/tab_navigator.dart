@@ -13,7 +13,13 @@ class TabNavigator extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final String tabItem;
   final void Function() logoutPressed;
-  TabNavigator({this.navigatorKey, this.tabItem, @required this.logoutPressed});
+  final void Function() loginAsDriverPressed;
+  TabNavigator({
+    this.navigatorKey,
+    this.tabItem,
+    @required this.logoutPressed,
+    @required this.loginAsDriverPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +38,10 @@ class TabNavigator extends StatelessWidget {
         break;
 
       case "Account":
-        child = AccountScreen();
+        child = AccountScreen(
+          logoutPressed: logoutPressed,
+          loginAsDriverPressed: loginAsDriverPressed,
+        );
         break;
     }
     return Navigator(

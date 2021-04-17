@@ -5,10 +5,9 @@ import 'package:we_do/components/helper/helper_method.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/components/widgets/address_related/address_card.dart';
 import 'package:we_do/model/address_model.dart';
-import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 
-class NewRequestLocationScreen extends StatefulWidget {
-  NewRequestLocationScreen(
+class NewGeneralRequestLocationScreen extends StatefulWidget {
+  NewGeneralRequestLocationScreen(
       {@required this.category,
       @required this.place,
       @required this.time,
@@ -19,11 +18,11 @@ class NewRequestLocationScreen extends StatefulWidget {
   final String details;
 
   @override
-  _NewRequestLocationScreenState createState() =>
-      _NewRequestLocationScreenState();
+  _NewGeneralRequestLocationScreenState createState() =>
+      _NewGeneralRequestLocationScreenState();
 }
 
-class _NewRequestLocationScreenState extends State<NewRequestLocationScreen> {
+class _NewGeneralRequestLocationScreenState extends State<NewGeneralRequestLocationScreen> {
   TextEditingController buldingController = TextEditingController();
   TextEditingController roomController = TextEditingController();
   TextEditingController couponController = TextEditingController();

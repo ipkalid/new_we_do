@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/style/color_theme.dart';
-import 'package:we_do/style/theme.dart';
 
 class SettingButton extends StatelessWidget {
   SettingButton({
     @required this.label,
-    this.active = true,
     @required this.onPressed,
     this.height = 54,
     this.hideShadow = false,
     @required this.icon,
   });
-  final bool active;
   final String label;
   final void Function() onPressed;
   final double height;
@@ -21,21 +18,15 @@ class SettingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 5),
       height: height,
       width: double.infinity,
-      decoration: BoxDecoration(
-        //color: active ? ColorTheme.kGrey : Colors.grey,
-        boxShadow: hideShadow ? [] : [kBoxShadow],
-      ),
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: ColorTheme.kGrey,
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(15.0),
-          ),
+          primary: ColorTheme.kOrange,
+          padding: EdgeInsets.symmetric(horizontal: 32),
         ),
-        onPressed: active ? onPressed : null,
+        onPressed: onPressed,
         child: Row(
           children: [
             Icon(
@@ -52,7 +43,7 @@ class SettingButton extends StatelessWidget {
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   color: Colors.black,
                 ),
               ),

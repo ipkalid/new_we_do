@@ -36,6 +36,9 @@ dependencies:
   group_button: ^2.1.0
   pin_code_fields: ^7.0.0
   timeline_tile: ^2.0.0
+  auto_size_text: ^2.1.0
+  transparent_image: ^2.0.0
+
 
 
 

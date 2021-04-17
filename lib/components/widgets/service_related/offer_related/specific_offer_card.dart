@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/model/offer_model.dart';
+import 'package:we_do/style/color_theme.dart';
 
-class OfferCard extends StatelessWidget {
-  OfferCard({this.offer, this.fromServiceScreen = false});
+class SpecificOfferCard extends StatelessWidget {
+  SpecificOfferCard({this.offer, this.fromServiceScreen = false});
   final Offer offer;
   final bool fromServiceScreen;
 
@@ -14,13 +15,7 @@ class OfferCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Color(0xffFAFAFA),
         borderRadius: BorderRadius.all(Radius.circular(16)),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, .2),
-            blurRadius: 8,
-            offset: Offset(3, 3),
-          )
-        ],
+        boxShadow: [ColorTheme.shadow],
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -28,8 +23,7 @@ class OfferCard extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 28,
-              backgroundImage: NetworkImage(
-                  "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80"),
+              backgroundImage: NetworkImage("${offer.driver.customer.picURL}"),
             ),
             Expanded(
               flex: 2,

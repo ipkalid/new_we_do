@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/general_offer_card.dart';
+import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/screens/1_customer_side/1_offer_screens/offer_search.dart';
 
 import 'filter_screen.dart';
@@ -30,8 +32,13 @@ class _OfferScreenState extends State<OfferScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Text("MyOfferScreen"),
+      body: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          GeneralOfferCard(
+            offer: generaloffer,
+          )
+        ],
       ),
     );
   }

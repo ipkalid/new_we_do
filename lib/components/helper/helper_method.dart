@@ -59,4 +59,18 @@ class HelperMethods {
       },
     );
   }
+
+  static void showSimpleDialog({
+    @required BuildContext context,
+    @required Widget child,
+  }) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return SimpleDialog(
+          children: [child],
+        );
+      },
+    );
+  }
 }

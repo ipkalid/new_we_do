@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/fab_bottom_app_bar/fab_bottom_app_bar.dart';
 import 'package:we_do/components/fab_bottom_app_bar/layout.dart';
-import 'package:we_do/helper/tab_navigator.dart';
+import 'package:we_do/screens/1_customer_side/tab_navigator.dart';
 import 'package:we_do/screens/0_auth_screens/intro_screen.dart';
-import 'package:we_do/screens/1_customer_side/3_new_request/new_request_details_screen.dart';
+import 'package:we_do/screens/1_customer_side/3_new_request/1_general_request/new_general_request_details_screen.dart';
 import 'package:we_do/style/color_theme.dart';
 
 class WeDoCustomerApp extends StatefulWidget {
@@ -14,7 +14,6 @@ class WeDoCustomerApp extends StatefulWidget {
 
 class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
   void _goToLogOut(BuildContext context) async {
-    // UserPreferences().removeUser();
     Navigator.pushReplacementNamed(context, IntroScreen.routeName);
   }
 
@@ -27,12 +26,23 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
     "Account": GlobalKey<NavigatorState>(),
   };
 
+  // void _onItemTapped(String tabItem, int index) {
+  //   if (tabItem == _currentPage) {
+  //     _navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
+  //   } else {
+  //     setState(() {
+  //       _currentPage = pageKeys[index];
+  //     });
+  //   }
+  // }
+
   void _onItemTapped(String tabItem, int index) {
     if (tabItem == _currentPage) {
       _navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
     } else {
       setState(() {
         _currentPage = pageKeys[index];
+        // _selectedIndex = index;
       });
     }
   }
@@ -46,6 +56,9 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
         logoutPressed: () {
           _goToLogOut(context);
         },
+        loginAsDriverPressed: () {
+          print("object");
+        },
       ),
     );
   }
@@ -57,8 +70,8 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
         final isFirstRouteInCurrentTab =
             !await _navigatorKeys[_currentPage].currentState.maybePop();
         if (isFirstRouteInCurrentTab) {
-          if (_currentPage != "Home") {
-            _onItemTapped("Home", 0);
+          if (_currentPage != "Offer") {
+            _onItemTapped("Offer", 0);
 
             return false;
           }
@@ -80,7 +93,7 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
           color: Colors.grey,
           selectedColor: ColorTheme.kOrange,
           notchedShape: CircularNotchedRectangle(),
-          onTabSelected: (value) => _onItemTapped("", value),
+          onTabSelected: (int index) => _onItemTapped(pageKeys[index], index),
           items: [
             FABBottomAppBarItem(iconData: Icons.drive_eta, text: 'Offer'),
             FABBottomAppBarItem(
@@ -127,7 +140,8 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => NewRequstDetailsScreen(), fullscreenDialog: true),
+          builder: (context) => NewGeneralRequstDetailsScreen(),
+          fullscreenDialog: true),
     );
   }
 }

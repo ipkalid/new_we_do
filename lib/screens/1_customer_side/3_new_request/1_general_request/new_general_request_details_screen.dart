@@ -5,16 +5,16 @@ import 'package:we_do/components/buttons/select_button.dart';
 import 'package:we_do/components/helper/helper_method.dart';
 import 'package:we_do/components/text_field/long_text_field.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
-import 'package:we_do/screens/1_customer_side/3_new_request/new_request_location_screen.dart';
+import 'package:we_do/screens/1_customer_side/3_new_request/1_general_request/new_general_request_location_screen.dart';
 
-class NewRequstDetailsScreen extends StatefulWidget {
-  const NewRequstDetailsScreen({Key key}) : super(key: key);
+class NewGeneralRequstDetailsScreen extends StatefulWidget {
+  const NewGeneralRequstDetailsScreen({Key key}) : super(key: key);
 
   @override
-  _NewRequstDetailsScreenState createState() => _NewRequstDetailsScreenState();
+  _NewGeneralRequstDetailsScreenState createState() => _NewGeneralRequstDetailsScreenState();
 }
 
-class _NewRequstDetailsScreenState extends State<NewRequstDetailsScreen> {
+class _NewGeneralRequstDetailsScreenState extends State<NewGeneralRequstDetailsScreen> {
   TextEditingController placeController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
@@ -106,7 +106,7 @@ class _NewRequstDetailsScreenState extends State<NewRequstDetailsScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => NewRequestLocationScreen(
+        builder: (context) => NewGeneralRequestLocationScreen(
             category: category,
             details: detailsController.text,
             place: placeController.text,

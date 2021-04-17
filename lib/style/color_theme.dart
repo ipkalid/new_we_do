@@ -11,4 +11,10 @@ class ColorTheme {
   static const kMainDarkBackgroundColor = Color(0xff1C2C35);
   static const kNavBarLightColor = Colors.white;
   static const kNavBarDarkColor = Color(0xff0D1519);
+
+  static const shadow = BoxShadow(
+    color: Color.fromRGBO(0, 0, 0, .2),
+    blurRadius: 8,
+    offset: Offset(3, 3),
+  );
 }

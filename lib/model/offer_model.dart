@@ -189,3 +189,17 @@ var offereeeee = Offer(
     ),
   ),
 );
+
+var generaloffer = Offer(
+  isSpecific: 1,
+  deliveryPrice: 33,
+  deliveryTime: "11:30 PM",
+  locationName: "PANDA",
+  driver: Driver(
+    customer: Customer(
+      name: "KHALID",
+      picURL:
+          "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80",
+    ),
+  ),
+);

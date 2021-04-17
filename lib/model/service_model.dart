@@ -108,4 +108,9 @@ class Service {
 }
 
 var serviceeee = Service(
-    request: requestttt, offer: offereeeee, orderCost: 33, status: "Deliverd");
+  serviceID: "232323",
+  request: requestttt,
+  offer: offereeeee,
+  orderCost: 33,
+  status: "Deliverd",
+);
