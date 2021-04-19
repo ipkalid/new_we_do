@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/setting_button.dart';
+import 'package:we_do/screens/1_customer_side/5_profile_screen/wallet_screen.dart';
 
 class AccountScreen extends StatefulWidget {
   AccountScreen(
@@ -37,7 +38,7 @@ class _AccountScreenState extends State<AccountScreen> {
           SettingButton(
             label: "Wallet",
             icon: Icons.account_balance_wallet_outlined,
-            onPressed: () => "onPressed",
+            onPressed: () => _goWalletScreen(context),
           ),
           SettingButton(
             label: "Terms and Conditions",
@@ -60,6 +61,15 @@ class _AccountScreenState extends State<AccountScreen> {
             onPressed: () => _onLogout(context),
           ),
         ],
+      ),
+    );
+  }
+
+  void _goWalletScreen(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WalletScreen(),
       ),
     );
   }

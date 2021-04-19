@@ -53,3 +53,9 @@ class Transaction {
     return allTransactions;
   }
 }
+
+Transaction transss = Transaction(
+  type: "ddd",
+  date: "2020/20/20",
+  amount: 23,
+);

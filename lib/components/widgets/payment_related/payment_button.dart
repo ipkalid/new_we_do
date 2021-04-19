@@ -3,13 +3,14 @@ import 'package:we_do/style/color_theme.dart';
 import 'package:we_do/style/theme.dart';
 
 class PaymentButton extends StatelessWidget {
-  PaymentButton(
-      {@required this.label,
-      this.active = true,
-      @required this.onPressed,
-      this.height = 60,
-      this.hideShadow = false,
-      this.icon});
+  PaymentButton({
+    @required this.label,
+    this.active = true,
+    @required this.onPressed,
+    this.height = 60,
+    this.hideShadow = false,
+    this.icon = Icons.card_membership,
+  });
   final bool active;
   final String label;
   final void Function() onPressed;

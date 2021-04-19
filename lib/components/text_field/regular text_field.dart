@@ -6,11 +6,13 @@ class RegularTextField extends StatelessWidget {
     this.label,
     this.isPasswaord = false,
     this.withLabel = false,
+    this.keyboardType = TextInputType.text
   });
   final TextEditingController controller;
   final String label;
   final bool isPasswaord;
   final bool withLabel;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class RegularTextField extends StatelessWidget {
         SizedBox(
           height: 48,
           child: TextField(
+            keyboardType: keyboardType,
             controller: controller,
             obscureText: isPasswaord,
             decoration: InputDecoration(

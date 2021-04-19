@@ -1,4 +1,4 @@
-class Card {
+class CreditCard {
   String walletID;
   String cardID;
   String title;
@@ -10,7 +10,7 @@ class Card {
   double addedAt;
   String status;
 
-  Card(
+  CreditCard(
       {this.walletID,
       this.cardID,
       this.title,
@@ -20,7 +20,7 @@ class Card {
       this.iban,
       this.status});
 
-  Card.fromJson(Map<String, dynamic> json) {
+  CreditCard.fromJson(Map<String, dynamic> json) {
     walletID = json["walletID"];
     cardID = json["cardID"];
     title = json["title"];
@@ -32,3 +32,10 @@ class Card {
     status = json["status"];
   }
 }
+
+var carddd = CreditCard(
+  iban: "3265786478213",
+  name: "ALahli",
+  expiredDate: 11919,
+  number: "24242424",
+);
