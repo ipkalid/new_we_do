@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:we_do/components/fab_bottom_app_bar/fab_bottom_app_bar.dart';
 import 'package:we_do/components/fab_bottom_app_bar/layout.dart';
 import 'package:we_do/screens/1_customer_side/tab_navigator.dart';
@@ -16,6 +17,10 @@ class WeDoCustomerApp extends StatefulWidget {
 
 class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
   void _goToLogOut(BuildContext context) async {
+    Box currentUser = await Hive.openBox<String>("currentUser");
+    currentUser.delete("customerID");
+    currentUser.delete("phoneNumber");
+    currentUser.delete("walletID");
     Navigator.pushReplacementNamed(context, IntroScreen.routeName);
   }
 

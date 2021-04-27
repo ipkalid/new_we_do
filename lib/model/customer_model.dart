@@ -4,6 +4,8 @@ import 'network_helper.dart';
 
 // revision is done
 
+// TODO: SAVE ALL THE DATA IN HIVE (add verification with each request)
+
 class Customer {
   String customerID;
   String name;
@@ -49,8 +51,7 @@ class Customer {
   }
 
   // UC01 - complete
-  Future<String> signUp(
-      String phoneNumber, String name, String password) async {
+  Future signUp(String phoneNumber, String name, String password) async {
     NetworkHelper backend = NetworkHelper(url: Uri(path: "/api/customers"));
 
     // TODO: HASHING
@@ -60,9 +61,15 @@ class Customer {
       "password": password
     };
 
-    var response = await backend.postData(body);
+    var response = await backend.postDataTemp(body);
 
-    return response;
+    if (response is String)
+      return response;
+    else if (response == []) {
+      return "no user with this phone number";
+    } else {
+      return Customer.fromJson(response);
+    }
   }
 
   // UC04 -

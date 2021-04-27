@@ -29,6 +29,9 @@ dependencies:
   hive_flutter: ^1.0.0
   hive_generator: ^1.0.1
 
+  provider: ^5.0.0
+  path_provider: ^2.0.1
+
 #networking
   http: ^0.13.1
 
@@ -38,6 +41,8 @@ dependencies:
   timeline_tile: ^2.0.0
   auto_size_text: ^2.1.0
   transparent_image: ^2.0.0
+  liquid_pull_to_refresh: ^3.0.0
+
 
 
 

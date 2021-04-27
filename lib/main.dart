@@ -6,13 +6,17 @@ import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 import 'package:we_do/screens/2_driver_side/wedo_driver_app.dart';
 import 'package:we_do/style/app_theme.dart';
 
+var globalRoute;
 void main() async {
   await Hive.initFlutter();
-  //TODO: LATER
-  //await UserPreferences().getToken();
-  // (global.token == null)
-  //     ? global.route = IntroScreen.routeName
-  //     : global.route = WeDoApp.routeName;
+  Box currentUser = await Hive.openBox<String>("currentUser");
+
+  String userId = currentUser.get("customerID");
+
+  (userId == null)
+      ? globalRoute = IntroScreen.routeName
+      : globalRoute = WeDoCustomerApp.routeName;
+
   runApp(WeDoMain());
 }
 
@@ -21,13 +25,9 @@ class WeDoMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.customerTheme,
-      //darkTheme: kDarkTheme,
-      title: 'We do App',
+      title: 'Wedo App',
       debugShowCheckedModeBanner: false,
-
-      //home: TestClass(),
-      initialRoute: IntroScreen.routeName,
-      // initialRoute: global.route,
+      initialRoute: globalRoute,
       routes: {
         IntroScreen.routeName: (context) => IntroScreen(),
         WeDoCustomerApp.routeName: (context) => WeDoCustomerApp(),

@@ -36,6 +36,20 @@ class NetworkHelper {
     }
   }
 
+  Future postDataTemp(Map<String, String> body) async {
+    http.Response response = await http.post(url, body: body);
+
+    if (response.statusCode == 200) {
+      String data = response.body;
+      debugPrintURL(response);
+
+      return jsonDecode(data);
+    } else {
+      debugPrintURL(response);
+      return "Error occurred: ${response.statusCode}";
+    }
+  }
+
   Future<String> postData(Map<String, dynamic> body) async {
     http.Response response = await http.post(url, body: body);
 

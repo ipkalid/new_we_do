@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
+import 'package:we_do/model/customer_model.dart';
 import 'package:we_do/screens/0_auth_screens/terms_and_conditions.dart';
 import 'package:we_do/screens/0_auth_screens/vertification_screen.dart';
+import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 import 'package:we_do/style/app_text_style.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -20,6 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
+  String error = '';
   @override
   void initState() {
     super.initState();
@@ -56,6 +60,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               label: "Confirm Password",
               isPasswaord: true,
             ),
+            SizedBox(height: 16),
+            Text(error),
             SizedBox(height: 32),
             Text(
               "By Sign Up You Agree to",
@@ -75,11 +81,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             SizedBox(height: 32),
             ActionButton(
-                label: "Sign Up", onPressed: () => _goToVertificationScreen())
+              label: "Sign Up",
+              onPressed: () => postSignUp(),
+            )
           ],
         ),
       ),
     );
+  }
+
+  postSignUp() async {
+    if (nameController.text != '' &&
+        phoneNumberController.text != '' &&
+        passwordController.text != '' &&
+        confirmPasswordController.text != '') {
+      setState(() {
+        error = '';
+      });
+      if (passwordController.text != confirmPasswordController.text) {
+        print('yes?');
+        setState(() {
+          error = 'The password and confirmed password did not match';
+        });
+      } else {
+        // the http request
+        var response = await Customer().signUp(phoneNumberController.text,
+            nameController.text, passwordController.text);
+
+        if (response.customerID == null) {
+          setState(() {
+            error = 'Please enter a valid information';
+          });
+        } else {
+          Box currentUser = await Hive.openBox<String>("currentUser");
+          // Assigning the user info to the hive database (aka offline database)
+          currentUser.put("customerID", response.customerID);
+          currentUser.put("phoneNumber", response.phoneNumber);
+          currentUser.put("walletID", response.walletID);
+
+          goToWeDoCustomerApp();
+        }
+      }
+    } else {
+      setState(() {
+        error = 'Pleas fill the empty fields';
+      });
+    }
   }
 
   _goToTermsAndConditionsScreen() async {
@@ -100,5 +147,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         fullscreenDialog: true,
       ),
     );
+  }
+
+  goToWeDoCustomerApp() async {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        WeDoCustomerApp.routeName, (Route<dynamic> route) => false);
   }
 }

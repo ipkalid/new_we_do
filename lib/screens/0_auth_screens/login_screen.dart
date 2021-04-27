@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
+import 'package:we_do/model/customer_model.dart';
 import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  String error = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Expanded(
                   child: RegularTextField(
                     controller: phoneNumberController,
+                    keyboardType: TextInputType.number,
                     label: "Phone Number",
                   ),
                 ),
@@ -58,16 +62,39 @@ class _LoginScreenState extends State<LoginScreen> {
               label: "Password",
               isPasswaord: true,
             ),
+            Text(error),
             SizedBox(height: 64),
             ActionButton(
               label: "Login",
-              onPressed: () => goToWeDoCustomerApp(),
+              onPressed: () => getSignIn(),
               // hideShadow: true,
             )
           ],
         ),
       ),
     );
+  }
+
+  getSignIn() async {
+    String phonenumber = '966' + phoneNumberController.text;
+    {
+      Customer response = await Customer().signIn(phonenumber);
+
+      if (phonenumber == response.phoneNumber &&
+          passwordController.text == response.password) {
+        Box currentUser = await Hive.openBox<String>("currentUser");
+        // Assigning the user info to the hive database (aka offline database)
+        currentUser.put("customerID", response.customerID);
+        currentUser.put("phoneNumber", response.phoneNumber);
+        currentUser.put("walletID", response.walletID);
+
+        goToWeDoCustomerApp();
+      } else {
+        setState(() {
+          error = 'Invalid password or phone number';
+        });
+      }
+    }
   }
 
   goToWeDoCustomerApp() async {
