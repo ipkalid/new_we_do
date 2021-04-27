@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/style/color_theme.dart';
-import 'package:we_do/style/theme.dart';
+import 'package:we_do/style/app_color.dart';
+import 'package:we_do/style/app_theme.dart';
 
 class ActionButton extends StatelessWidget {
   ActionButton(
@@ -9,7 +9,7 @@ class ActionButton extends StatelessWidget {
       @required this.onPressed,
       this.height = 48,
       this.hideShadow = false,
-      this.color = ColorTheme.kOrange});
+      this.color = AppColor.kOrange});
   final bool active;
   final Color color;
   final String label;

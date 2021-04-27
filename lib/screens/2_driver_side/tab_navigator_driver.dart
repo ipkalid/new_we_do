@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/screens/1_customer_side/1_offer_screens/offer_screen.dart';
-import 'package:we_do/screens/1_customer_side/2_my_order_screens/my_order_screen.dart';
-import 'package:we_do/screens/1_customer_side/4_history_screens/history_screen.dart';
-import 'package:we_do/screens/1_customer_side/5_profile_screen/account_screen.dart';
+import 'package:we_do/screens/2_driver_side/1_request_screen/request_screen.dart';
+import 'package:we_do/screens/2_driver_side/2_my_order_screen/my_order_screen.dart';
+import 'package:we_do/screens/2_driver_side/4_wallet_screen/wallet_screen.dart';
+import 'package:we_do/screens/2_driver_side/5_profile_screen.dart/account_screen.dart';
+
 
 class TabNavigatorDriverSide extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final String tabItem;
   final void Function() logoutPressed;
-  final void Function() loginAsDriverPressed;
+  final void Function() loginAsCustomerPressed;
   TabNavigatorDriverSide({
     this.navigatorKey,
     this.tabItem,
     @required this.logoutPressed,
-    @required this.loginAsDriverPressed,
+    @required this.loginAsCustomerPressed, Null Function() loginAsDriverPressed,
   });
 
   @override
@@ -21,21 +22,21 @@ class TabNavigatorDriverSide extends StatelessWidget {
     Widget child;
     switch (tabItem) {
       case "Offer":
-        child = OfferScreen();
+        child = RequestsScreen();
         break;
 
       case "My_Order":
         child = MyOrderScreen();
         break;
 
-      case "History":
-        child = HistoryScreen();
+      case "Wallet":
+        child = WalletScreen();
         break;
 
       case "Account":
         child = AccountScreen(
           logoutPressed: logoutPressed,
-          loginAsDriverPressed: loginAsDriverPressed,
+          loginAsDriverPressed: loginAsCustomerPressed,
         );
         break;
     }

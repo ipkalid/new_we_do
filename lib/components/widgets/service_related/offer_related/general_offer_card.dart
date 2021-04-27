@@ -3,7 +3,7 @@ import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/helper/helper_method.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/screens/1_customer_side/3_new_request/2_specfic_request/new_specfic_request_screen.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/style/app_color.dart';
 
 class GeneralOfferCard extends StatelessWidget {
   GeneralOfferCard({Key key, this.offer, this.isDialog = false})
@@ -25,7 +25,7 @@ class GeneralOfferCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: isDialog ? Colors.white : Color(0xffFAFAFA),
           borderRadius: BorderRadius.all(Radius.circular(16)),
-          boxShadow: isDialog ? null : [ColorTheme.shadow],
+          boxShadow: isDialog ? null : [AppColor.shadow],
         ),
         child: Column(
           children: [

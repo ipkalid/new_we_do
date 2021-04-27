@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/setting_button.dart';
-import 'package:we_do/screens/1_customer_side/5_profile_screen/driver_login_screen.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/wallet_screen.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -39,7 +38,7 @@ class _AccountScreenState extends State<AccountScreen> {
           SettingButton(
             label: "Wallet",
             icon: Icons.account_balance_wallet_outlined,
-            onPressed: () => _goToWalletScreen(context),
+            onPressed: () => _goWalletScreen(context),
           ),
           SettingButton(
             label: "Terms and Conditions",
@@ -54,7 +53,7 @@ class _AccountScreenState extends State<AccountScreen> {
           SettingButton(
             label: "Log in as Driver",
             icon: Icons.directions_car_outlined,
-            onPressed: () => _goToDriverLoginScreen(context),
+            onPressed: () => widget.loginAsDriverPressed,
           ),
           SettingButton(
             label: "Log Out",
@@ -66,22 +65,11 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 
-  void _goToWalletScreen(BuildContext context) async {
+  void _goWalletScreen(BuildContext context) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => WalletScreen(),
-      ),
-    );
-  }
-
-  void _goToDriverLoginScreen(BuildContext context) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DriverLoginScreen(
-            loginAsDriverPressed: widget.loginAsDriverPressed),
-        fullscreenDialog: true,
       ),
     );
   }

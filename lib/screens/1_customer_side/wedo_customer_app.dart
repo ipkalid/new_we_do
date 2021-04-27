@@ -4,7 +4,9 @@ import 'package:we_do/components/fab_bottom_app_bar/layout.dart';
 import 'package:we_do/screens/1_customer_side/tab_navigator.dart';
 import 'package:we_do/screens/0_auth_screens/intro_screen.dart';
 import 'package:we_do/screens/1_customer_side/3_new_request/1_general_request/new_general_request_details_screen.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/screens/2_driver_side/wedo_driver_app.dart';
+import 'package:we_do/style/app_color.dart';
+import 'package:we_do/style/app_theme.dart';
 
 class WeDoCustomerApp extends StatefulWidget {
   static const routeName = '/wedo-customer-app';
@@ -15,6 +17,10 @@ class WeDoCustomerApp extends StatefulWidget {
 class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
   void _goToLogOut(BuildContext context) async {
     Navigator.pushReplacementNamed(context, IntroScreen.routeName);
+  }
+
+  void _goToDriverSide(BuildContext context) async {
+    Navigator.pushReplacementNamed(context, WeDoDriverApp.routeName);
   }
 
   String _currentPage = "Offer";
@@ -57,7 +63,7 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
           _goToLogOut(context);
         },
         loginAsDriverPressed: () {
-          print("object");
+          _goToDriverSide(context);
         },
       ),
     );
@@ -79,33 +85,37 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
         // let system handle back button if we're on the first route
         return isFirstRouteInCurrentTab;
       },
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            _buildOffstageNavigator("Offer"),
-            _buildOffstageNavigator("My_Order"),
-            _buildOffstageNavigator("History"),
-            _buildOffstageNavigator("Account"),
-          ],
+      child: MaterialApp(
+        theme: AppTheme.customerTheme,
+        home: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            children: [
+              _buildOffstageNavigator("Offer"),
+              _buildOffstageNavigator("My_Order"),
+              _buildOffstageNavigator("History"),
+              _buildOffstageNavigator("Account"),
+            ],
+          ),
+          bottomNavigationBar: FABBottomAppBar(
+            color: Colors.grey,
+            selectedColor: AppColor.kOrange,
+            notchedShape: CircularNotchedRectangle(),
+            onTabSelected: (int index) => _onItemTapped(pageKeys[index], index),
+            items: [
+              FABBottomAppBarItem(iconData: Icons.drive_eta, text: 'Offer'),
+              FABBottomAppBarItem(
+                  iconData: Icons.local_mall_rounded, text: 'Orders'),
+              FABBottomAppBarItem(iconData: Icons.history, text: 'History'),
+              FABBottomAppBarItem(
+                  iconData: Icons.account_circle, text: 'Profile'),
+            ],
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: _buildFab(context),
+          // floatingActionButton: _buildFab(context),
         ),
-        bottomNavigationBar: FABBottomAppBar(
-          color: Colors.grey,
-          selectedColor: ColorTheme.kOrange,
-          notchedShape: CircularNotchedRectangle(),
-          onTabSelected: (int index) => _onItemTapped(pageKeys[index], index),
-          items: [
-            FABBottomAppBarItem(iconData: Icons.drive_eta, text: 'Offer'),
-            FABBottomAppBarItem(
-                iconData: Icons.local_mall_rounded, text: 'Orders'),
-            FABBottomAppBarItem(iconData: Icons.history, text: 'History'),
-            FABBottomAppBarItem(
-                iconData: Icons.account_circle, text: 'Profile'),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: _buildFab(context),
-        // floatingActionButton: _buildFab(context),
       ),
     );
   }
@@ -128,7 +138,7 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
           return new Icon(
             Icons.add_circle_outline,
             size: constraint.biggest.height - 2,
-            color: ColorTheme.kOrange,
+            color: AppColor.kOrange,
           );
         }),
         elevation: 2.0,

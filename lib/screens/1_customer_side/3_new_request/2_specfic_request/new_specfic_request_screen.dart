@@ -7,7 +7,6 @@ import 'package:we_do/components/text_field/long_text_field.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/components/widgets/address_related/address_card.dart';
 import 'package:we_do/model/address_model.dart';
-import 'package:we_do/screens/1_customer_side/3_new_request/1_general_request/new_general_request_location_screen.dart';
 
 class NewSpecificRequstDetailsScreen extends StatefulWidget {
   const NewSpecificRequstDetailsScreen({Key key}) : super(key: key);

@@ -6,8 +6,8 @@ import 'package:we_do/screens/0_auth_screens/components/intro_messages_model.dar
 import 'package:we_do/screens/0_auth_screens/login_screen.dart';
 import 'package:we_do/screens/0_auth_screens/signup_screen.dart';
 
-import 'package:we_do/style/text_style_theme.dart';
-import 'package:we_do/style/theme.dart';
+import 'package:we_do/style/app_text_style.dart';
+import 'package:we_do/style/app_theme.dart';
 
 class IntroScreen extends StatefulWidget {
   static const routeName = '/intro-screen';
@@ -59,13 +59,13 @@ class _IntroScreenState extends State<IntroScreen> {
                       children: [
                         Text(
                           "First Time Here?",
-                          style: TextStyleTheme.introOrangeText,
+                          style: AppTextStyle.introOrangeText,
                         ),
                         TextButton(
                             onPressed: () => _goToSignUpScreen(),
                             child: Text(
                               "Sign Up.",
-                              style: TextStyleTheme.introPressedText,
+                              style: AppTextStyle.introPressedText,
                             ))
                       ],
                     )

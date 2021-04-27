@@ -3,7 +3,7 @@ import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/screens/0_auth_screens/terms_and_conditions.dart';
 import 'package:we_do/screens/0_auth_screens/vertification_screen.dart';
-import 'package:we_do/style/text_style_theme.dart';
+import 'package:we_do/style/app_text_style.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = '/signup-screen';
@@ -60,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Text(
               "By Sign Up You Agree to",
               textAlign: TextAlign.center,
-              style: TextStyleTheme.introOrangeText,
+              style: AppTextStyle.introOrangeText,
             ),
             TextButton(
               onPressed: () => _goToTermsAndConditionsScreen(),
@@ -70,7 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               child: Text(
                 "Terms And Conditions",
-                style: TextStyleTheme.introPressedText,
+                style: AppTextStyle.introPressedText,
               ),
             ),
             SizedBox(height: 32),

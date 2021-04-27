@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/model/offer_model.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/style/app_color.dart';
 
 class SpecificOfferCard extends StatelessWidget {
   SpecificOfferCard({this.offer, this.fromServiceScreen = false});
@@ -15,7 +15,7 @@ class SpecificOfferCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Color(0xffFAFAFA),
         borderRadius: BorderRadius.all(Radius.circular(16)),
-        boxShadow: [ColorTheme.shadow],
+        boxShadow: [AppColor.shadow],
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),

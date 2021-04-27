@@ -3,7 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:we_do/screens/0_auth_screens/intro_screen.dart';
 import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
-import 'package:we_do/style/theme.dart';
+import 'package:we_do/screens/2_driver_side/wedo_driver_app.dart';
+import 'package:we_do/style/app_theme.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -30,6 +31,7 @@ class WeDoMain extends StatelessWidget {
       routes: {
         IntroScreen.routeName: (context) => IntroScreen(),
         WeDoCustomerApp.routeName: (context) => WeDoCustomerApp(),
+        WeDoDriverApp.routeName: (context) => WeDoDriverApp(),
       },
     );
   }

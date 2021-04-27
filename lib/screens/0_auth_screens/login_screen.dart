@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
-import 'package:we_do/components/widgets/payment_related/payment_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 

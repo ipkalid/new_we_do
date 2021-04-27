@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/style/app_color.dart';
 
 class SettingButton extends StatelessWidget {
   SettingButton({
@@ -23,7 +23,7 @@ class SettingButton extends StatelessWidget {
       width: double.infinity,
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: ColorTheme.kOrange,
+          primary: AppColor.kOrange,
           padding: EdgeInsets.symmetric(horizontal: 32),
         ),
         onPressed: onPressed,

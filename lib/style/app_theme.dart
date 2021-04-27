@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/style/app_color.dart';
 
 const kYello = Color(0xffF9ED69);
 const kOrange = Color(0xffF08A5D);
@@ -46,7 +46,30 @@ class AppTheme {
       centerTitle: true,
       elevation: 0,
       iconTheme: IconThemeData(color: Colors.black),
-      color: ColorTheme.kYello,
+      color: AppColor.kYello,
+      textTheme: TextTheme(
+        headline6: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    ),
+    tabBarTheme: TabBarTheme(
+      labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+      unselectedLabelStyle:
+          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+      labelColor: Colors.black,
+      unselectedLabelColor: Colors.grey,
+    ),
+  );
+  static ThemeData driverTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      elevation: 0,
+      iconTheme: IconThemeData(color: Colors.black),
+      color: AppColor.kBlue,
       textTheme: TextTheme(
         headline6: TextStyle(
           color: Colors.black,

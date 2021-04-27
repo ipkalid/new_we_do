@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/style/color_theme.dart';
-import 'package:we_do/style/theme.dart';
+import 'package:we_do/style/app_color.dart';
+import 'package:we_do/style/app_theme.dart';
 
 class PaymentButton extends StatelessWidget {
   PaymentButton({
@@ -29,7 +29,7 @@ class PaymentButton extends StatelessWidget {
       ),
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: ColorTheme.kGrey,
+          backgroundColor: AppColor.kGrey,
           padding: EdgeInsets.symmetric(horizontal: 16),
           shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(15.0),

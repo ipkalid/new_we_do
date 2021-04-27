@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 
 import '../../../components/buttons/action_button.dart';
-import '../../../style/color_theme.dart';
+import '../../../style/app_color.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen();
@@ -54,7 +54,7 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             Center(
               child: GroupButton(
-                selectedColor: ColorTheme.kOrange,
+                selectedColor: AppColor.kOrange,
                 isRadio: true,
                 spacing: 10,
                 onSelected: (index, isSelected) =>
@@ -102,7 +102,7 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             Center(
               child: GroupButton(
-                selectedColor: ColorTheme.kOrange,
+                selectedColor: AppColor.kOrange,
                 isRadio: true,
                 spacing: 10,
                 onSelected: (index, isSelected) {

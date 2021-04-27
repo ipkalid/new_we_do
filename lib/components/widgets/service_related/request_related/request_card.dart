@@ -3,7 +3,7 @@ import 'package:we_do/components/widgets/service_related/request_related/request
 import 'package:we_do/components/widgets/service_related/service_screen.dart';
 import 'package:we_do/model/request_model.dart';
 import 'package:we_do/model/service_model.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/style/app_color.dart';
 
 class RequestCard extends StatelessWidget {
   RequestCard({this.request, this.service});

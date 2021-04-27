@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/model/card_model.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/style/app_color.dart';
 
 class PaymentDetailsScreen extends StatefulWidget {
   PaymentDetailsScreen({Key key, this.creditCard, this.isForPay = false})
@@ -47,7 +47,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               height: 86,
               decoration: BoxDecoration(
-                boxShadow: [ColorTheme.shadow],
+                boxShadow: [AppColor.shadow],
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
@@ -103,7 +103,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
               padding: const EdgeInsets.symmetric(vertical: 32),
               child: ActionButton(
                   label: widget.isForPay ? "Pay" : "Add Money",
-                  color: widget.isForPay ? Colors.green : ColorTheme.kOrange,
+                  color: widget.isForPay ? Colors.green : AppColor.kOrange,
                   onPressed: () => ""),
             )
           ],

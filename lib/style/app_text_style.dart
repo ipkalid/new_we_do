@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/style/color_theme.dart';
+import 'package:we_do/style/app_color.dart';
 
-class TextStyleTheme {
+class AppTextStyle {
   static const introPressedText = TextStyle(
-    color: ColorTheme.kPurple,
+    color: AppColor.kPurple,
     fontSize: 17,
     fontWeight: FontWeight.bold,
   );
 
   static const introOrangeText = TextStyle(
-    color: ColorTheme.kOrange,
+    color: AppColor.kOrange,
     fontSize: 17,
   );
 
