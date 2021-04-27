@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'dart:async';
 
-var globalUderId;
+var globalUserId;
 var globalDriverId;
 var globalWalletId;
 var globalPhoneNumber;
@@ -81,16 +81,16 @@ class HiveEditor {
 
   Future<void> getUserID() async {
     var box = await Hive.openBox('currentUser');
-    globalUderId = box.get("customerID");
+    globalUserId = box.get("customerID");
   }
 
   Future<void> getDriverID() async {
     var box = await Hive.openBox('currentUser');
-    globalUderId = box.get("driverID");
+    globalUserId = box.get("driverID");
   }
 
   Future<void> getWalletID() async {
     var box = await Hive.openBox('currentUser');
-    globalUderId = box.get("walletID");
+    globalUserId = box.get("walletID");
   }
 }

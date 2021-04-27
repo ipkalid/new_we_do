@@ -73,7 +73,7 @@ class Offer {
   // returns: an array of all the general offers and a driver object embedded
   // in them instead of driverID
   // UC14 - COMPLETE
-  Future<List<Offer>> getAllGeneralOffers(int constant) async {
+  static Future<List<Offer>> getAllGeneralOffers(int constant) async {
     // if constant = 0 it means this is the first call
     // if constant >=1 it means the number of loading times.
     NetworkHelper backend = NetworkHelper(
@@ -96,10 +96,10 @@ class Offer {
   }
 
   // for a general offer
-  Future<List<Request>> getAllSpecificRequests(String offerID) async {
+  static Future<List<Request>> getAllSpecificRequests(String offerID) async {
     NetworkHelper backend = NetworkHelper(
-        url:
-            Uri(path: "/api/requests", query: "isSpecific=1&offerID=$offerID"));
+        url: Uri(path: "/api/requests"),
+        query: "isSpecific=1&offerID=$offerID");
 
     Map<String, String> header = {"embed": "customer"};
 
@@ -115,7 +115,7 @@ class Offer {
   }
 
   // UC26 - COMPLETE
-  Future<String> createSpecificOffer(
+  static Future<String> createSpecificOffer(
       String requestID, String driverID, double deliveryPrice) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(
@@ -132,7 +132,7 @@ class Offer {
   }
 
   // UC27 - COMPLETE
-  Future<String> createGeneralOffer(String driverID, String deliveryTime,
+  static Future<String> createGeneralOffer(String driverID, String deliveryTime,
       String offerType, String locationName, double deliveryPrice) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(
@@ -151,9 +151,12 @@ class Offer {
   }
 
   // UC28 - COMPLETE
-  Future<String> cancelOffer(String offerID, String driverID) async {
-    NetworkHelper backend = NetworkHelper(
-        url: Uri(path: "/api/customers/$driverID/Offers/$offerID"));
+  static Future<String> cancelOffer(String offerID, String driverID) async {
+    // NetworkHelper backend = NetworkHelper(
+    //     url: Uri(path: "/api/customers/$driverID/Offers/$offerID"));
+
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/offers/$offerID"));
 
     var body = {"status": "canceled"};
 
@@ -162,8 +165,20 @@ class Offer {
     return response;
   }
 
+// UC28 - COMPLETE
+  static Future<String> acceptSpecificOffer(String offerID) async {
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/offers/$offerID"));
+
+    var body = {"status": "accepted"};
+
+    var response = await backend.putData(body);
+
+    return response;
+  }
+
   // COMPLETE
-  Future<List<Offer>> getMyWaitingOffers(String driverID) async {
+  static Future<List<Offer>> getMyWaitingOffers(String driverID) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(path: "/api/drivers/$driverID/offers"),
         query: "status=waiting");
@@ -180,26 +195,3 @@ class Offer {
     return allOffer;
   }
 }
-
-var offereeeee = Offer(
-  deliveryPrice: 33,
-  driver: Driver(
-    customer: Customer(
-      name: "ddd",
-    ),
-  ),
-);
-
-var generaloffer = Offer(
-  isSpecific: 1,
-  deliveryPrice: 33,
-  deliveryTime: "11:30 PM",
-  locationName: "PANDA",
-  driver: Driver(
-    customer: Customer(
-      name: "KHALID",
-      picURL:
-          "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80",
-    ),
-  ),
-);

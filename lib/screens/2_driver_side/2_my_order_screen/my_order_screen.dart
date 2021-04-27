@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_do/components/widgets/service_related/request_related/request_card.dart';
-import 'package:we_do/model/request_model.dart';
-import 'package:we_do/model/service_model.dart';
+
 
 class MyOrderScreen extends StatefulWidget {
   MyOrderScreen({Key key}) : super(key: key);
@@ -35,17 +33,17 @@ class _MyOrderScreenState extends State<MyOrderScreen> {
             ListView(
               padding: EdgeInsets.all(16),
               children: [
-                RequestCard(
-                  request: requestttt,
-                )
+                // RequestCard(
+                //   request: requestttt,
+                // )
               ],
             ),
             ListView(
               padding: EdgeInsets.all(16),
               children: [
-                RequestCard(
-                  service: serviceeee,
-                )
+                // RequestCard(
+                //   service: serviceeee,
+                // )
               ],
             ),
           ],

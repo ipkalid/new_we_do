@@ -107,10 +107,3 @@ class Service {
   Future<Service> createService(String offerID, String requestID) {}
 }
 
-var serviceeee = Service(
-  serviceID: "232323",
-  request: requestttt,
-  offer: offereeeee,
-  orderCost: 33,
-  status: "Deliverd",
-);

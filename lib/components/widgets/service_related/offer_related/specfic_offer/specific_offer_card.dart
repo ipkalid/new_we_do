@@ -3,10 +3,17 @@ import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/style/app_color.dart';
 
-class SpecificOfferCard extends StatelessWidget {
+class SpecificOfferCard extends StatefulWidget {
   SpecificOfferCard({this.offer, this.fromServiceScreen = false});
   final Offer offer;
   final bool fromServiceScreen;
+
+  @override
+  _SpecificOfferCardState createState() => _SpecificOfferCardState();
+}
+
+class _SpecificOfferCardState extends State<SpecificOfferCard> {
+  bool isActive = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,11 @@ class SpecificOfferCard extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 28,
-              backgroundImage: NetworkImage("${offer.driver.customer.picURL}"),
+              backgroundImage: NetworkImage(
+                (widget.offer.driver.customer.picURL != null)
+                    ? "${widget.offer.driver.customer.picURL}"
+                    : "",
+              ),
             ),
             Expanded(
               flex: 2,
@@ -34,28 +45,29 @@ class SpecificOfferCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      offer.driver.customer.name,
+                      widget.offer.driver.customer.name,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                     ),
                     SizedBox(
                       height: 14,
                     ),
-                    if (!fromServiceScreen)
+                    if (!widget.fromServiceScreen)
                       Text(
-                        "Price ${offer.deliveryPrice} SR",
+                        "Price ${widget.offer.deliveryPrice} SR",
                         style: TextStyle(fontSize: 18),
                       )
                   ],
                 ),
               ),
             ),
-            if (!fromServiceScreen)
+            if (!widget.fromServiceScreen)
               SizedBox(
                 width: 96,
                 child: ActionButton(
                   label: "Accept",
-                  onPressed: () => "",
+                  active: isActive,
+                  onPressed: () => putAcceptOffer(),
                   color: Color(0xff7DAD40),
                   hideShadow: true,
                 ),
@@ -64,5 +76,12 @@ class SpecificOfferCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void putAcceptOffer() {
+    Offer.acceptSpecificOffer(widget.offer.offerID);
+    setState(() {
+      isActive = false;
+    });
   }
 }

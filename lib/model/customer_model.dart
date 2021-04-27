@@ -51,7 +51,7 @@ class Customer {
   }
 
   // UC01 - complete
-  Future signUp(String phoneNumber, String name, String password) async {
+  static Future signUp(String phoneNumber, String name, String password) async {
     NetworkHelper backend = NetworkHelper(url: Uri(path: "/api/customers"));
 
     // TODO: HASHING
@@ -74,7 +74,7 @@ class Customer {
 
   // UC04 -
   //Mansour
-  Future signIn(String phoneNumber) async {
+  static Future signIn(String phoneNumber) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(path: "/api/customers"), query: "phoneNumber=$phoneNumber");
 
@@ -90,7 +90,7 @@ class Customer {
   }
 
   // UC02 - complete
-  Future<String> activateDriverSide(
+  static Future<String> activateDriverSide(
       String customerID, String kfupmEmail) async {
     NetworkHelper backend = NetworkHelper(url: Uri(path: "/api/drivers"));
 
@@ -121,7 +121,7 @@ class Customer {
   }
 
   // UC13 - COMPLETE
-  Future<String> rateCustomer(String customerID, int rating) async {
+  static Future<String> rateCustomer(String customerID, int rating) async {
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/customers/$customerID"));
 

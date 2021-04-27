@@ -11,15 +11,17 @@ class NetworkHelper {
   int port = 3000;
 
   NetworkHelper({Uri url, String query}) {
-    if (query == null)
+    if (query == null) {
+      print("is null");
       this.url = Uri(scheme: "http", host: server, port: port, path: url.path);
-    else
+    } else {
       this.url = Uri(
           scheme: "http",
           host: server,
           port: port,
           path: url.path,
           query: query);
+    }
   }
 
   Future getData(Map<String, String> header) async {
@@ -52,7 +54,7 @@ class NetworkHelper {
 
   Future<String> postData(Map<String, dynamic> body) async {
     http.Response response = await http.post(url, body: body);
-
+    debugPrintURL(response);
     if (response.statusCode == 200) {
       return "success";
     } else {
@@ -63,7 +65,7 @@ class NetworkHelper {
 
   Future<String> putData(Map<String, dynamic> body) async {
     http.Response response = await http.put(url, body: body);
-
+    debugPrintURL(response);
     if (response.statusCode == 200) {
       return "success";
     } else {

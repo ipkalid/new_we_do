@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
   getSignIn() async {
     String phonenumber = '966' + phoneNumberController.text;
     {
-      Customer response = await Customer().signIn(phonenumber);
+      Customer response = await Customer.signIn(phonenumber);
 
       if (phonenumber == response.phoneNumber &&
           passwordController.text == response.password) {

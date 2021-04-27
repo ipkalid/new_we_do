@@ -105,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         });
       } else {
         // the http request
-        var response = await Customer().signUp(phoneNumberController.text,
+        var response = await Customer.signUp(phoneNumberController.text,
             nameController.text, passwordController.text);
 
         if (response.customerID == null) {
@@ -139,6 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  // ignore: unused_element
   _goToVertificationScreen() async {
     await Navigator.push(
       context,

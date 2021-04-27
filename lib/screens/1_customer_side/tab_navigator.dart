@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/screens/1_customer_side/1_offer_screens/offer_screen.dart';
-import 'package:we_do/screens/1_customer_side/2_my_order_screens/my_order_screen.dart';
+import 'package:we_do/screens/1_customer_side/2_my_requests_screen/my_requests_screen.dart';
 import 'package:we_do/screens/1_customer_side/4_history_screens/history_screen.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/account_screen.dart';
+
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -30,7 +31,7 @@ class TabNavigator extends StatelessWidget {
         break;
 
       case "My_Order":
-        child = MyOrderScreen();
+        child = MyRequestsScreen();
         break;
 
       case "History":

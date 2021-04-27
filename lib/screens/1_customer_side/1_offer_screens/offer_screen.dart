@@ -18,7 +18,7 @@ class _OfferScreenState extends State<OfferScreen> {
   var _filterdData;
   Future<List<Offer>> futureOfferList;
   void _getOffer() {
-    futureOfferList = Offer().getAllGeneralOffers(0);
+    futureOfferList = Offer.getAllGeneralOffers(0);
   }
 
   @override
@@ -51,7 +51,9 @@ class _OfferScreenState extends State<OfferScreen> {
         showChildOpacityTransition: false,
         springAnimationDurationInMilliseconds: 200,
         onRefresh: () async {
-          _getOffer();
+          setState(() {
+            _getOffer();
+          });
         },
         child: FutureBuilder(
           future: futureOfferList,

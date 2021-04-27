@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
-import 'package:we_do/components/widgets/service_related/offer_related/specific_offer_card.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/specfic_offer/specfic_offer_list.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/specfic_offer/specific_offer_card.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/request_model.dart';
 
@@ -13,6 +14,17 @@ class RequestScreen extends StatefulWidget {
 }
 
 class _RequestScreenState extends State<RequestScreen> {
+  Future<List<Offer>> futureOfferList;
+  void _getOffer() {
+    futureOfferList = Request.getAllSpecificOffers(widget.request.requestID);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getOffer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +46,7 @@ class _RequestScreenState extends State<RequestScreen> {
                 Expanded(
                   child: ActionButton(
                     label: "Cancel",
-                    onPressed: () => "",
+                    onPressed: () => _putCancelRequest(),
                     color: Colors.red,
                     hideShadow: true,
                   ),
@@ -76,16 +88,35 @@ class _RequestScreenState extends State<RequestScreen> {
             ),
           ),
           Expanded(
-              child: ListView(
-            padding: EdgeInsets.all(16),
-            children: [
-              SpecificOfferCard(
-                offer: offereeeee,
-              )
-            ],
-          ))
+            child: FutureBuilder(
+              future: futureOfferList,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return SpecficOfferList(
+                    offerList: snapshot.data,
+                  );
+                } else if (snapshot.hasError) {
+                  return ListView(
+                    shrinkWrap: true,
+                    children: [
+                      Text("Error"),
+                    ],
+                  );
+                }
+
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          )
         ],
       ),
     );
+  }
+
+  _putCancelRequest() async {
+    Request.cancelRequest(widget.request.requestID);
+    Navigator.pop(context);
   }
 }

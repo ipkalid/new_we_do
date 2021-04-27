@@ -57,12 +57,12 @@ class Request {
   }
 
   // for a general request
-  Future<List<Offer>> getAllSpecificOffers(String requestID) async {
+  static Future<List<Offer>> getAllSpecificOffers(String requestID) async {
     NetworkHelper backend = NetworkHelper(
-        url: Uri(
-            path: "/api/Offers", query: "isSpecific=1&requestID=$requestID"));
+        url: Uri(path: "/api/Offers"),
+        query: "isSpecific=1&requestID=$requestID");
 
-    Map<String, String> header = {"embed": "driver"};
+    Map<String, String> header = {"embed": "driver{customer}"};
 
     var response = await backend.getData(header);
 
@@ -76,7 +76,7 @@ class Request {
   }
 
   // UC16 - COMPLETE
-  Future<String> createSpecificRequest(String offerID, String customerID,
+  static Future<String> createSpecificRequest(String offerID, String customerID,
       String description, String addressID) async {
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/customers/$customerID/requests"));
@@ -93,8 +93,12 @@ class Request {
   }
 
   // UC17 - COMPLETE
-  Future<String> createGeneralRequest(String customerID, String deliveryTime,
-      String deliverFrom, String description, String addressID) async {
+  static Future<String> createGeneralRequest(
+      String customerID,
+      String deliveryTime,
+      String deliverFrom,
+      String description,
+      String addressID) async {
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/customers/$customerID/requests"));
 
@@ -110,11 +114,12 @@ class Request {
     return response;
   }
 
-  Future<List<Request>> getMyWaitingRequests(String customerID) async {
+  static Future<List<Request>> getMyWaitingRequests(String customerID) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(path: "/api/customers/$customerID/requests"),
-        query: "status=waiting");
+        query: "status=wating");
 
+//TODO: FIX it line  116 wating
     var response = await backend.getData({});
 
     List<Request> allRequests = [];
@@ -126,14 +131,17 @@ class Request {
 
     return allRequests;
   }
+
+  static Future<String> cancelRequest(String requestID) async {
+    // NetworkHelper backend = NetworkHelper(
+    //     url: Uri(path: "/api/customers/$customerID/Requests/$requestID"));
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/Requests/$requestID"));
+
+    var body = {"status": "canceled"};
+
+    var response = await backend.putData(body);
+
+    return response;
+  }
 }
-
-
-var requestttt = Request(
-  customerID: "customerID",
-  requestID: "requestID",
-  addressID: "addressID",
-  deliveryTime: "deliveryTime",
-  deliverFrom: "deliverFrom",
-  description: "description",
-);

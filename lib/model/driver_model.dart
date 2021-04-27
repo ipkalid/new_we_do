@@ -17,13 +17,11 @@ class Driver {
 
 // no need for rating in the creation of a driver
 
-  // TODO: DELETE THIS.CUSTOMER after finishing the DUMMY testing
   Driver(
       {this.driverID,
       this.kfupmEmail,
       this.status,
-      this.rating,
-      this.customer});
+      this.rating,});
 
   Driver.fromJson(Map<String, dynamic> json) {
     if (json.containsKey("customerID"))

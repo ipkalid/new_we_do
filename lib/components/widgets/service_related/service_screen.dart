@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
-import 'package:we_do/components/widgets/service_related/offer_related/specific_offer_card.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/specfic_offer/specific_offer_card.dart';
 import 'package:we_do/components/widgets/service_related/track_screen.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/service_model.dart';
@@ -80,10 +80,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
             child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 16),
               children: [
-                SpecificOfferCard(
-                  offer: offereeeee,
-                  fromServiceScreen: true,
-                ),
+                // SpecificOfferCard(
+                //   offer: offereeeee,
+                //   fromServiceScreen: true,
+                // ),
                 SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
