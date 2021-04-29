@@ -7,9 +7,12 @@ import 'package:we_do/components/text_field/long_text_field.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/components/widgets/address_related/address_card.dart';
 import 'package:we_do/model/address_model.dart';
+import 'package:we_do/model/offer_model.dart';
+import 'package:we_do/model/request_model.dart';
 
 class NewSpecificRequstDetailsScreen extends StatefulWidget {
-  const NewSpecificRequstDetailsScreen({Key key}) : super(key: key);
+  NewSpecificRequstDetailsScreen({this.offer});
+  final Offer offer;
 
   @override
   _NewSpecificRequstDetailsScreenState createState() =>
@@ -18,6 +21,7 @@ class NewSpecificRequstDetailsScreen extends StatefulWidget {
 
 class _NewSpecificRequstDetailsScreenState
     extends State<NewSpecificRequstDetailsScreen> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   TextEditingController buldingController = TextEditingController();
   TextEditingController roomController = TextEditingController();
@@ -25,10 +29,22 @@ class _NewSpecificRequstDetailsScreenState
 
   String category = "Select Catagory";
 
-  Address _selectedAddress;
+  List<Address> customerAddress;
+
+  void getAddreses() async {
+    customerAddress = await Address.getCustomerAddresses();
+  }
+
+  Address selectedAddress;
 
   String location = "Select Location";
   bool locationSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getAddreses();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +106,12 @@ class _NewSpecificRequstDetailsScreenState
             ),
           ),
           Text("Enter your location", style: TextStyle(fontSize: 18)),
+          SizedBox(height: 16),
+          RegularTextField(
+            label: "Name",
+            controller: nameController,
+            withLabel: true,
+          ),
           SizedBox(height: 16),
           RegularTextField(
             label: "Bulding",
@@ -156,30 +178,84 @@ class _NewSpecificRequstDetailsScreenState
           message: "Details shoud not be empty");
       return;
     }
+    if (selectedAddress == null) {
+      if (buldingController.text == "") {
+        HelperMethods.showDialogAlert(
+          context: context,
+          title: "Error",
+          message: "Address Name shoud not be empty",
+        );
+        return;
+      }
+
+      if (buldingController.text == "") {
+        HelperMethods.showDialogAlert(
+          context: context,
+          title: "Error",
+          message: "Bulding shoud not be empty",
+        );
+        return;
+      }
+      if (roomController.text == "") {
+        HelperMethods.showDialogAlert(
+            context: context,
+            title: "Error",
+            message: "Room shoud not be empty");
+        return;
+      }
+      Address.createAddress(
+        name: nameController.text,
+        buildingNo: buldingController.text,
+        description: "",
+        room: roomController.text,
+      ).then(
+        (address) => Request.createSpecificRequest(
+          offerID: widget.offer.offerID,
+          description: detailsController.text,
+          addressID: address,
+        ),
+      );
+    } else {
+      Request.createSpecificRequest(
+        offerID: widget.offer.offerID,
+        description: detailsController.text,
+        addressID: selectedAddress.addressID,
+      );
+    }
 
     Navigator.pop(context);
   }
 
   void selectAddress(BuildContext context) {
+    if (customerAddress.isEmpty) return;
+
+    List<Widget> addresesCards = [];
+
+    for (var address in customerAddress) {
+      addresesCards.add(
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: AddressCard(
+            address: address,
+            toScreen: false,
+            onTap: (value) {
+              selectedAddress = value;
+              setState(() {
+                location = selectedAddress.name;
+                locationSelected = true;
+              });
+
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      );
+    }
     HelperMethods.showBottomSheet(
       context: context,
       child: Expanded(
         child: ListView(
-          children: [
-            AddressCard(
-              address: adresstst,
-              toScreen: false,
-              onTap: (value) {
-                _selectedAddress = value;
-                setState(() {
-                  location = _selectedAddress.name;
-                  locationSelected = true;
-                });
-
-                Navigator.pop(context);
-              },
-            ),
-          ],
+          children: addresesCards,
         ),
       ),
     );

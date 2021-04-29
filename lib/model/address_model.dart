@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:we_do/helper/hive_preferences.dart';
 
 import 'network_helper.dart';
@@ -34,8 +35,14 @@ class Address {
   }
 
   // UC19 - COMPLETE
-  Future<String> createAddress(
-      String name, String buildingNo, String description, String room) async {
+  static Future<String> createAddress(
+      {@required String name,
+      @required String buildingNo,
+      String description,
+      @required String room}) async {
+    print(Uri(path: "/api/customers/$globalUserId/addresses").toString());
+    print("/api/customers/$globalUserId/addresses");
+
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/addresses"));
 
@@ -46,26 +53,26 @@ class Address {
       "room": room,
     };
 
-    var response = await backend.postData(body);
+    var response = await backend.postDataTemp(body);
 
-    return response;
+    return response["addressID"];
   }
-}
 
-// UC19 - COMPLETE
-Future<List<Address>> getCustomerAddresses() async {
-  NetworkHelper backend = NetworkHelper(
-      url: Uri(path: "/api/addresses"), query: "customerID=$globalUserId");
+  // UC19 - COMPLETE
+  static Future<List<Address>> getCustomerAddresses() async {
+    NetworkHelper backend = NetworkHelper(
+        url: Uri(path: "/api/addresses"), query: "customerID=$globalUserId");
 
-  var response = await backend.getData({});
+    var response = await backend.getData({});
 
-  List<Address> allAddresses = [];
-  var anAddress;
+    List<Address> allAddresses = [];
+    var anAddress;
 
-  for (anAddress in response) {
-    allAddresses.add(Address.fromJson(anAddress));
+    for (anAddress in response) {
+      allAddresses.add(Address.fromJson(anAddress));
+    }
+    return allAddresses;
   }
-  return allAddresses;
 }
 
 //only for testing

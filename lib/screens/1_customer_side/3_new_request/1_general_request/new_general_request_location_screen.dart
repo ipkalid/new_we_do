@@ -5,6 +5,7 @@ import 'package:we_do/components/helper/helper_method.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/components/widgets/address_related/address_card.dart';
 import 'package:we_do/model/address_model.dart';
+import 'package:we_do/model/request_model.dart';
 
 class NewGeneralRequestLocationScreen extends StatefulWidget {
   NewGeneralRequestLocationScreen(
@@ -22,15 +23,30 @@ class NewGeneralRequestLocationScreen extends StatefulWidget {
       _NewGeneralRequestLocationScreenState();
 }
 
-class _NewGeneralRequestLocationScreenState extends State<NewGeneralRequestLocationScreen> {
+class _NewGeneralRequestLocationScreenState
+    extends State<NewGeneralRequestLocationScreen> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController buldingController = TextEditingController();
   TextEditingController roomController = TextEditingController();
   TextEditingController couponController = TextEditingController();
 
-  Address _selectedAddress;
+  List<Address> customerAddress;
+
+  void getAddreses() async {
+    customerAddress = await Address.getCustomerAddresses();
+  }
+
+  Address selectedAddress;
 
   String location = "Select Location";
   bool locationSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getAddreses();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +93,13 @@ class _NewGeneralRequestLocationScreenState extends State<NewGeneralRequestLocat
               ),
             ),
           ),
-          Text("Enter your location", style: TextStyle(fontSize: 18)),
+          Text("Enter new location", style: TextStyle(fontSize: 18)),
+          SizedBox(height: 16),
+          RegularTextField(
+            label: "Name",
+            controller: nameController,
+            withLabel: true,
+          ),
           SizedBox(height: 16),
           RegularTextField(
             label: "Bulding",
@@ -143,18 +165,51 @@ class _NewGeneralRequestLocationScreenState extends State<NewGeneralRequestLocat
   }
 
   void goToSendRequest() async {
-    if (buldingController.text == "") {
-      HelperMethods.showDialogAlert(
-        context: context,
-        title: "Error",
-        message: "Bulding shoud not be empty",
+    if (selectedAddress == null) {
+      if (buldingController.text == "") {
+        HelperMethods.showDialogAlert(
+          context: context,
+          title: "Error",
+          message: "Address Name shoud not be empty",
+        );
+        return;
+      }
+
+      if (buldingController.text == "") {
+        HelperMethods.showDialogAlert(
+          context: context,
+          title: "Error",
+          message: "Bulding shoud not be empty",
+        );
+        return;
+      }
+      if (roomController.text == "") {
+        HelperMethods.showDialogAlert(
+            context: context,
+            title: "Error",
+            message: "Room shoud not be empty");
+        return;
+      }
+      Address.createAddress(
+        name: nameController.text,
+        buildingNo: buldingController.text,
+        description: "",
+        room: roomController.text,
+      ).then(
+        (address) => Request.createGeneralRequest(
+          deliveryTime: widget.time,
+          deliverFrom: widget.place,
+          description: widget.details,
+          addressID: address,
+        ),
       );
-      return;
-    }
-    if (roomController.text == "") {
-      HelperMethods.showDialogAlert(
-          context: context, title: "Error", message: "Room shoud not be empty");
-      return;
+    } else {
+      Request.createGeneralRequest(
+        deliveryTime: widget.time,
+        deliverFrom: widget.place,
+        description: widget.details,
+        addressID: selectedAddress.addressID,
+      );
     }
 
     Navigator.pop(context);
@@ -162,27 +217,38 @@ class _NewGeneralRequestLocationScreenState extends State<NewGeneralRequestLocat
   }
 
   void selectAddress(BuildContext context) {
+    if (customerAddress.isEmpty) return;
+
+    List<Widget> addresesCards = [];
+
+    for (var address in customerAddress) {
+      addresesCards.add(
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: AddressCard(
+            address: address,
+            toScreen: false,
+            onTap: (value) {
+              selectedAddress = value;
+              setState(() {
+                location = selectedAddress.name;
+                locationSelected = true;
+              });
+
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      );
+    }
     HelperMethods.showBottomSheet(
       context: context,
       child: Expanded(
         child: ListView(
-          children: [
-            AddressCard(
-              address: adresstst,
-              toScreen: false,
-              onTap: (value) {
-                _selectedAddress = value;
-                setState(() {
-                  location = _selectedAddress.name;
-                  locationSelected = true;
-                });
-
-                Navigator.pop(context);
-              },
-            ),
-          ],
+          children: addresesCards,
         ),
       ),
     );
   }
+
 }

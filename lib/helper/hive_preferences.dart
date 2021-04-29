@@ -1,10 +1,10 @@
 import 'package:hive/hive.dart';
 import 'dart:async';
 
-var globalUserId;
-var globalDriverId;
-var globalWalletId;
-var globalPhoneNumber;
+String globalUserId;
+String globalDriverId;
+String globalWalletId;
+String globalPhoneNumber;
 
 class HiveEditor {
 //   Future<void> saveUser(Account account) async {

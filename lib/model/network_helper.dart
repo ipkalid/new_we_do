@@ -41,6 +41,7 @@ class NetworkHelper {
   // for the sign up
   Future postDataTemp(Map<String, String> body) async {
     http.Response response = await http.post(url, body: body);
+    debugPrintURL(response);
 
     if (response.statusCode == 200) {
       String data = response.body;

@@ -79,7 +79,7 @@ class Offer {
     // if constant >=1 it means the number of loading times.
     NetworkHelper backend = NetworkHelper(
         url: Uri(path: "/api/Offers"),
-        query: "limit=25&page=$constant&isSpecific=0&status=waiting");
+        query: "limit=25&page=$constant&isSpecific=0&status=wating");
 
     // TODO: there is problem from the backend with this header:
     Map<String, String> header = {"embed": "driver{customer}"};

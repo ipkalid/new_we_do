@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:we_do/helper/hive_preferences.dart';
 
 import 'address_model.dart';
@@ -78,8 +79,11 @@ class Request {
   }
 
   // UC16 - COMPLETE
-  static Future<String> createSpecificRequest(
-      String offerID, String description, String addressID) async {
+  static Future<String> createSpecificRequest({
+    @required String offerID,
+    @required String description,
+    @required String addressID,
+  }) async {
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/requests"));
 
@@ -95,8 +99,12 @@ class Request {
   }
 
   // UC17 - COMPLETE
-  static Future<String> createGeneralRequest(String deliveryTime,
-      String deliverFrom, String description, String addressID) async {
+  static Future<String> createGeneralRequest({
+    @required String deliveryTime,
+    @required String deliverFrom,
+    @required String description,
+    @required String addressID,
+  }) async {
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/requests"));
 
