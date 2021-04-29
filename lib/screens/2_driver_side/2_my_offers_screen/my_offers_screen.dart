@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import '../../../helper/hive_preferences.dart';
+import '../../../model/offer_model.dart';
+import '../../../model/service_model.dart';
 
-
-class MyOrderScreen extends StatefulWidget {
-  MyOrderScreen({Key key}) : super(key: key);
+class MyOffersScreen extends StatefulWidget {
+  MyOffersScreen({Key key}) : super(key: key);
 
   @override
-  _MyOrderScreenState createState() => _MyOrderScreenState();
+  _MyOffersScreenState createState() => _MyOffersScreenState();
 }
 
-class _MyOrderScreenState extends State<MyOrderScreen> {
+class _MyOffersScreenState extends State<MyOffersScreen> {
+  Future<List<Offer>> futureRequestsList;
+  Future<List<Service>> futureServicesList;
+
+  void _getOffersList() {
+    futureRequestsList = Offer.getMyWaitingRequests(globalUserId);
+  }
+
+  void _getServicesList() {
+    futureServicesList = Service().getCustomerServices(globalUserId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

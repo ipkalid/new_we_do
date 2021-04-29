@@ -194,4 +194,6 @@ class Offer {
 
     return allOffer;
   }
+
+  static Future<List<Offer>> getMyWaitingRequests(globalUserId) {}
 }
