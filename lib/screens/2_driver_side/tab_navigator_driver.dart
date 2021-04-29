@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/screens/2_driver_side/1_request_screen/request_screen.dart';
-import 'package:we_do/screens/2_driver_side/2_my_order_screen/my_order_screen.dart';
+import 'package:we_do/screens/2_driver_side/2_my_offers_screen/my_offers_screen.dart';
 import 'package:we_do/screens/2_driver_side/4_wallet_screen/wallet_screen.dart';
 import 'package:we_do/screens/2_driver_side/5_profile_screen.dart/account_screen.dart';
-
 
 class TabNavigatorDriverSide extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
@@ -14,7 +13,8 @@ class TabNavigatorDriverSide extends StatelessWidget {
     this.navigatorKey,
     this.tabItem,
     @required this.logoutPressed,
-    @required this.loginAsCustomerPressed, Null Function() loginAsDriverPressed,
+    @required this.loginAsCustomerPressed,
+    Null Function() loginAsDriverPressed,
   });
 
   @override
@@ -26,7 +26,7 @@ class TabNavigatorDriverSide extends StatelessWidget {
         break;
 
       case "My_Order":
-        child = MyOrderScreen();
+        child = MyOffersScreen();
         break;
 
       case "Wallet":

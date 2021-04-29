@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-
-class MyOrderScreen extends StatefulWidget {
-  MyOrderScreen({Key key}) : super(key: key);
+class MyOffersScreen extends StatefulWidget {
+  MyOffersScreen({Key key}) : super(key: key);
 
   @override
-  _MyOrderScreenState createState() => _MyOrderScreenState();
+  _MyOffersScreenState createState() => _MyOffersScreenState();
 }
 
-class _MyOrderScreenState extends State<MyOrderScreen> {
+class _MyOffersScreenState extends State<MyOffersScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
