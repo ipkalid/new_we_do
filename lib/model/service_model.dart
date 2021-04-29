@@ -1,3 +1,4 @@
+import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/model/request_model.dart';
 
 import 'network_helper.dart';
@@ -61,14 +62,67 @@ class Service {
     complaintID = json["complaintID"];
   }
 
-  void changeStatus(String newStatus) {}
-
-  Future<List<Service>> getCustomerServices(String customerID) async {
+  // UC30 - COMPLETE
+  Future<String> changeStatus(
+      String serviceID, String customerID, String newStatus) async {
+    // the real path should be "/api/customers/$customerID/services/$serviceID"
     NetworkHelper backend =
-        NetworkHelper(url: Uri(path: "/api/customers/$customerID/services"));
+        NetworkHelper(url: Uri(path: "/api/services/$serviceID"));
+
+    // TODO: newStatus must be a constant...enumeration
+    var body = {"status": newStatus};
+
+    var response = await backend.putData(body);
+
+    return response;
+  }
+
+  Future<List<Service>> getCustomerServices() async {
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/services"));
 
     Map<String, String> header = {
-      "embed": "request{customer}, offer{driver{customer}}"
+      "embed": "request{address{customer}}, offer{driver{customer}}"
+    };
+
+    var response = await backend.getData(header);
+
+    List<Service> allServices = [];
+    var aService;
+
+    for (aService in response) {
+      allServices.add(Service.fromJson(aService));
+    }
+
+    return allServices;
+  }
+
+  Future<List<Service>> getDriverServices(String driverID) async {
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/drivers/$driverID/services"));
+
+    Map<String, String> header = {
+      "embed": "request{address{customer}}, offer{driver{customer}}"
+    };
+
+    var response = await backend.getData(header);
+
+    List<Service> allServices = [];
+    var aService;
+
+    for (aService in response) {
+      allServices.add(Service.fromJson(aService));
+    }
+
+    return allServices;
+  }
+
+  Future<List<Service>> getAnOfferServices(String offerID) async {
+    NetworkHelper backend = NetworkHelper(
+        url: Uri(path: "/api/services", query: "offerID=$offerID"));
+
+    Map<String, String> header = {
+      "embed": "request{address{customer}}, offer{driver{customer}}"
     };
 
     var response = await backend.getData(header);
@@ -106,4 +160,3 @@ class Service {
 
   Future<Service> createService(String offerID, String requestID) {}
 }
-

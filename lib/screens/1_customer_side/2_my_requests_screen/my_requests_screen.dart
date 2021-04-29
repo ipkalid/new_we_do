@@ -16,11 +16,11 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
   Future<List<Service>> futureServicesList;
 
   void _getRequestsList() {
-    futureRequestsList = Request.getMyWaitingRequests(globalUserId);
+    futureRequestsList = Request.getMyWaitingRequests();
   }
 
   void _getServicesList() {
-    futureServicesList = Service().getCustomerServices(globalUserId);
+    futureServicesList = Service().getCustomerServices();
   }
 
   @override

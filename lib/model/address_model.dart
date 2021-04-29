@@ -1,3 +1,5 @@
+import 'network_helper.dart';
+
 class Address {
   String customerID;
   String addressID;
@@ -28,9 +30,27 @@ class Address {
     room = json["room"];
     description = json["description"];
   }
+
+  // UC19 - COMPLETE
+  Future<String> createAddress(String customerID, String name,
+      String buildingNo, String description, String room) async {
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/customers/$customerID/addresses"));
+
+    Map<String, String> body = {
+      "name": name,
+      "buildingNo": buildingNo,
+      "description": description,
+      "room": room,
+    };
+
+    var response = await backend.postData(body);
+
+    return response;
+  }
 }
 
-//only for testing 
+//only for testing
 var adresstst = Address(
     customerID: "Dd",
     addressID: "ss",

@@ -15,11 +15,11 @@ class _MyOffersScreenState extends State<MyOffersScreen> {
   Future<List<Service>> futureServicesList;
 
   void _getOffersList() {
-    futureRequestsList = Offer.getMyWaitingRequests(globalUserId);
+    futureRequestsList = Offer.getMyWaitingOffers();
   }
 
   void _getServicesList() {
-    futureServicesList = Service().getCustomerServices(globalUserId);
+    futureServicesList = Service().getCustomerServices();
   }
 
   @override

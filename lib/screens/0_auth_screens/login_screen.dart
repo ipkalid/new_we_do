@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
+import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/model/customer_model.dart';
 import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 
@@ -84,6 +85,10 @@ class _LoginScreenState extends State<LoginScreen> {
           passwordController.text == response.password) {
         Box currentUser = await Hive.openBox<String>("currentUser");
         // Assigning the user info to the hive database (aka offline database)
+        if (response.driverID == null) {
+          currentUser.put("driverID", response.driverID);
+          globalDriverId = response.driverID;
+        }
         currentUser.put("customerID", response.customerID);
         currentUser.put("phoneNumber", response.phoneNumber);
         currentUser.put("walletID", response.walletID);
