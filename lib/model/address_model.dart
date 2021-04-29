@@ -1,3 +1,5 @@
+import 'package:we_do/helper/hive_preferences.dart';
+
 import 'network_helper.dart';
 
 class Address {
@@ -32,10 +34,10 @@ class Address {
   }
 
   // UC19 - COMPLETE
-  Future<String> createAddress(String customerID, String name,
-      String buildingNo, String description, String room) async {
+  Future<String> createAddress(
+      String name, String buildingNo, String description, String room) async {
     NetworkHelper backend =
-        NetworkHelper(url: Uri(path: "/api/customers/$customerID/addresses"));
+        NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/addresses"));
 
     Map<String, String> body = {
       "name": name,
@@ -48,6 +50,22 @@ class Address {
 
     return response;
   }
+}
+
+// UC19 - COMPLETE
+Future<List<Address>> getCustomerAddresses() async {
+  NetworkHelper backend = NetworkHelper(
+      url: Uri(path: "/api/addresses"), query: "customerID=$globalUserId");
+
+  var response = await backend.getData({});
+
+  List<Address> allAddresses = [];
+  var anAddress;
+
+  for (anAddress in response) {
+    allAddresses.add(Address.fromJson(anAddress));
+  }
+  return allAddresses;
 }
 
 //only for testing
