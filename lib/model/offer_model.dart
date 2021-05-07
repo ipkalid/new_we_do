@@ -1,3 +1,4 @@
+import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/model/customer_model.dart';
 
 import 'driver_model.dart';
@@ -78,7 +79,7 @@ class Offer {
     // if constant >=1 it means the number of loading times.
     NetworkHelper backend = NetworkHelper(
         url: Uri(path: "/api/Offers"),
-        query: "limit=25&page=$constant&isSpecific=0&status=waiting");
+        query: "limit=25&page=$constant&isSpecific=0&status=wating");
 
     // TODO: there is problem from the backend with this header:
     Map<String, String> header = {"embed": "driver{customer}"};
@@ -116,10 +117,11 @@ class Offer {
 
   // UC26 - COMPLETE
   static Future<String> createSpecificOffer(
-      String requestID, String driverID, double deliveryPrice) async {
+      String requestID, double deliveryPrice) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(
-            path: "/api/customers/$driverID/Offers", query: "isSpecific=1"));
+            path: "/api/customers/$globalDriverId/Offers",
+            query: "isSpecific=1"));
 
     var body = {
       "requestID": requestID,
@@ -132,11 +134,12 @@ class Offer {
   }
 
   // UC27 - COMPLETE
-  static Future<String> createGeneralOffer(String driverID, String deliveryTime,
+  static Future<String> createGeneralOffer(String deliveryTime,
       String offerType, String locationName, double deliveryPrice) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(
-            path: "/api/customers/$driverID/Offers", query: "isSpecific=1"));
+            path: "/api/customers/$globalDriverId/Offers",
+            query: "isSpecific=1"));
 
     var body = {
       "deliveryPrice": deliveryPrice,
@@ -151,7 +154,7 @@ class Offer {
   }
 
   // UC28 - COMPLETE
-  static Future<String> cancelOffer(String offerID, String driverID) async {
+  static Future<String> cancelOffer(String offerID) async {
     // NetworkHelper backend = NetworkHelper(
     //     url: Uri(path: "/api/customers/$driverID/Offers/$offerID"));
 
@@ -178,10 +181,10 @@ class Offer {
   }
 
   // COMPLETE
-  static Future<List<Offer>> getMyWaitingOffers(String driverID) async {
+  static Future<List<Offer>> getMyWaitingOffers() async {
     NetworkHelper backend = NetworkHelper(
-        url: Uri(path: "/api/drivers/$driverID/offers"),
-        query: "status=waiting");
+        url: Uri(path: "/api/drivers/$globalDriverId/offers"),
+        query: "status=wating");
 
     var response = await backend.getData({});
 
@@ -194,4 +197,18 @@ class Offer {
 
     return allOffer;
   }
+
+  // // accept specific offer
+  // // UC29.2 - COMPLETE - Bugged from the backend
+  // Future<String> acceptOffer(String offerID) async {
+  //   NetworkHelper backend =
+  //       NetworkHelper(url: Uri(path: "/api/requests/$offerID"));
+  //
+  //   // extract this constant into separate file?
+  //   var body = {"status": "confirmed"};
+  //
+  //   var response = await backend.putData(body);
+  //
+  //   return response;
+  // }
 }

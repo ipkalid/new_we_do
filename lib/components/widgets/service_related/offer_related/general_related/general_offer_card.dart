@@ -113,7 +113,7 @@ class GeneralOfferCard extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => NewSpecificRequstDetailsScreen(),
+          builder: (context) => NewSpecificRequstDetailsScreen(offer: offer),
           fullscreenDialog: true),
     );
   }

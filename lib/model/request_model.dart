@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:we_do/helper/hive_preferences.dart';
+
 import 'address_model.dart';
 import 'customer_model.dart';
 import 'network_helper.dart';
@@ -76,10 +79,13 @@ class Request {
   }
 
   // UC16 - COMPLETE
-  static Future<String> createSpecificRequest(String offerID, String customerID,
-      String description, String addressID) async {
+  static Future<String> createSpecificRequest({
+    @required String offerID,
+    @required String description,
+    @required String addressID,
+  }) async {
     NetworkHelper backend =
-        NetworkHelper(url: Uri(path: "/api/customers/$customerID/requests"));
+        NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/requests"));
 
     var body = {
       "offerID": offerID,
@@ -93,14 +99,14 @@ class Request {
   }
 
   // UC17 - COMPLETE
-  static Future<String> createGeneralRequest(
-      String customerID,
-      String deliveryTime,
-      String deliverFrom,
-      String description,
-      String addressID) async {
+  static Future<String> createGeneralRequest({
+    @required String deliveryTime,
+    @required String deliverFrom,
+    @required String description,
+    @required String addressID,
+  }) async {
     NetworkHelper backend =
-        NetworkHelper(url: Uri(path: "/api/customers/$customerID/requests"));
+        NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/requests"));
 
     var body = {
       "deliveryTime": deliveryTime,
@@ -114,11 +120,11 @@ class Request {
     return response;
   }
 
-  static Future<List<Request>> getMyWaitingRequests(String customerID) async {
+  static Future<List<Request>> getMyWaitingRequests() async {
     NetworkHelper backend = NetworkHelper(
-        url: Uri(path: "/api/customers/$customerID/requests"),
+        url: Uri(path: "/api/customers/$globalUserId/requests"),
         query: "status=wating");
-
+    print(globalUserId);
 //TODO: FIX it line  116 wating
     var response = await backend.getData({});
 
@@ -139,6 +145,20 @@ class Request {
         NetworkHelper(url: Uri(path: "/api/Requests/$requestID"));
 
     var body = {"status": "canceled"};
+
+    var response = await backend.putData(body);
+
+    return response;
+  }
+
+  // accept specific request
+  // UC29.1 - COMPLETE - Bugged from the backend
+  Future<String> acceptRequest(String requestID) async {
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/requests/$requestID"));
+
+    // TODO: extract this constant into separate file?
+    var body = {"status": "confirmed"};
 
     var response = await backend.putData(body);
 

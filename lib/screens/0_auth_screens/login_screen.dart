@@ -85,6 +85,10 @@ class _LoginScreenState extends State<LoginScreen> {
           passwordController.text == response.password) {
         Box currentUser = await Hive.openBox<String>("currentUser");
         // Assigning the user info to the hive database (aka offline database)
+        if (response.driverID == null) {
+          currentUser.put("driverID", response.driverID);
+          globalDriverId = response.driverID;
+        }
         currentUser.put("customerID", response.customerID);
         globalUserId = response.customerID;
         currentUser.put("phoneNumber", response.phoneNumber);

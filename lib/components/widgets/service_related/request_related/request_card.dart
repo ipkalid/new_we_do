@@ -46,14 +46,18 @@ class RequestCard extends StatelessWidget {
                   children: [
                     Text(
                       (service == null)
-                          ? request.deliverFrom
+                          ? (request.deliverFrom == null)
+                              ? "Null"
+                              : request.deliverFrom
                           : service.request.deliverFrom,
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
                     ),
                     Text(
                       (service == null)
-                          ? request.deliveryTime
+                          ? (request.deliveryTime == null)
+                              ? "Null"
+                              : request.deliveryTime
                           : service.request.deliveryTime,
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w300),

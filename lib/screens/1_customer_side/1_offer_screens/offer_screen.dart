@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:we_do/components/widgets/service_related/offer_related/general_related/general_offer_card.dart';
 import 'package:we_do/components/widgets/service_related/offer_related/general_related/general_offer_list.dart';
@@ -45,36 +46,43 @@ class _OfferScreenState extends State<OfferScreen> {
           ),
         ],
       ),
-      body: LiquidPullToRefresh(
-        height: 50,
-        color: AppColor.kOrange,
-        showChildOpacityTransition: false,
-        springAnimationDurationInMilliseconds: 200,
-        onRefresh: () async {
+      body: FocusDetector(
+        onFocusGained: () {
           setState(() {
             _getOffer();
           });
         },
-        child: FutureBuilder(
-          future: futureOfferList,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GeneralOfferList(
-                offerList: snapshot.data,
-              );
-            } else if (snapshot.hasError) {
-              return ListView(
-                shrinkWrap: true,
-                children: [
-                  Text("Error"),
-                ],
-              );
-            }
-
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+        child: LiquidPullToRefresh(
+          height: 50,
+          color: AppColor.kOrange,
+          showChildOpacityTransition: false,
+          springAnimationDurationInMilliseconds: 200,
+          onRefresh: () async {
+            setState(() {
+              _getOffer();
+            });
           },
+          child: FutureBuilder(
+            future: futureOfferList,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return GeneralOfferList(
+                  offerList: snapshot.data,
+                );
+              } else if (snapshot.hasError) {
+                return ListView(
+                  shrinkWrap: true,
+                  children: [
+                    Text("Error"),
+                  ],
+                );
+              }
+
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'dart:async';
 
+
 var globalUserId;
 var globalDriverId;
 var globalKfupmMail;
