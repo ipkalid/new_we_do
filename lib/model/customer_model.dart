@@ -94,9 +94,13 @@ class Customer {
       String customerID, String kfupmEmail) async {
     NetworkHelper backend = NetworkHelper(url: Uri(path: "/api/drivers"));
 
-    var body = {"customerID": customerID, "kfupmEmail": kfupmEmail};
+    var body = {
+      "customerID": customerID,
+      "kfupmEmail": kfupmEmail,
+    };
 
-    var response = await backend.postData(body);
+    var response = await backend.postDataTemp(body);
+    print(response);
 
     return response;
   }

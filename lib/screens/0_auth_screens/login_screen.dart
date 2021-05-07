@@ -90,8 +90,11 @@ class _LoginScreenState extends State<LoginScreen> {
           globalDriverId = response.driverID;
         }
         currentUser.put("customerID", response.customerID);
+        globalUserId = response.customerID;
         currentUser.put("phoneNumber", response.phoneNumber);
+        globalPhoneNumber = response.phoneNumber;
         currentUser.put("walletID", response.walletID);
+        globalWalletId = response.walletID;
 
         goToWeDoCustomerApp();
       } else {
