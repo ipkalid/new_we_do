@@ -71,7 +71,7 @@ class Service {
       these status will be used heavily in moving between the screens.
     
    */
-  Future<String> changeStatus(String serviceID, String newStatus) async {
+  static Future<String> changeStatus(String serviceID, String newStatus) async {
     // the real path should be "/api/customers/$globalUserID/services/$serviceID"
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/services/$serviceID"));

@@ -79,11 +79,12 @@ class Request {
   }
 
   // UC16 - COMPLETE
-  static Future<String> createSpecificRequest({
-    @required String offerID,
-    @required String description,
-    @required String addressID,
-  }) async {
+  static Future<String> createSpecificRequest(
+      {@required String offerID,
+      @required String description,
+      @required String addressID,
+      @required String deliveryTime,
+      @required String deliverFrom}) async {
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/customers/$globalUserId/requests"));
 
@@ -91,6 +92,8 @@ class Request {
       "offerID": offerID,
       "description": description,
       "addressID": addressID,
+      "deliveryTime": deliveryTime,
+      "deliverFrom": deliverFrom,
     };
 
     var response = await backend.postData(body);

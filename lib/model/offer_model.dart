@@ -96,6 +96,17 @@ class Offer {
     return allOffers;
   }
 
+  static Future<Offer> getAnOffer(String offerID) async {
+    NetworkHelper backend =
+        NetworkHelper(url: Uri(path: "/api/Offers/$offerID"));
+
+    Map<String, String> header = {};
+
+    var response = await backend.getData(header);
+
+    return Offer.fromJson(response);
+  }
+
   // for a general offer
   static Future<List<Request>> getAllSpecificRequests(String offerID) async {
     NetworkHelper backend = NetworkHelper(

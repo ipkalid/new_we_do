@@ -142,7 +142,7 @@ class _TrackTimeline extends StatelessWidget {
             ),
             endChild: _RightChild(
               title: 'At The Store',
-              message: 'The captain has arrived to the store.',
+              message: 'The captain has arrived to the store and is ordering.',
             ),
             beforeLineStyle: LineStyle(
               color: (atTheStore) ? green : grey,
@@ -161,7 +161,7 @@ class _TrackTimeline extends StatelessWidget {
             ),
             endChild: _RightChild(
               title: 'To The Camp',
-              message: 'The captain is comming to the Camp.',
+              message: 'The captain is on his way to the camp.',
             ),
             beforeLineStyle: LineStyle(
               color: (toTheCamp) ? green : grey,
@@ -199,7 +199,7 @@ class _TrackTimeline extends StatelessWidget {
             ),
             endChild: _RightChild(
               title: 'Delivered',
-              message: 'Your Order has been deliverd.',
+              message: 'The captain is at your door.',
             ),
             beforeLineStyle: LineStyle(
               color: (deliverid) ? green : grey,

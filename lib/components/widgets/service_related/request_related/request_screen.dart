@@ -22,7 +22,8 @@ class _RequestScreenState extends State<RequestScreen> {
   @override
   void initState() {
     super.initState();
-    _getOffer();
+
+    if (widget.request.isSpecific == 0) _getOffer();
   }
 
   @override
@@ -77,39 +78,41 @@ class _RequestScreenState extends State<RequestScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              "Offers",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w700,
+          if (widget.request.isSpecific == 0)
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "Offers",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: futureOfferList,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return SpecficOfferList(
-                    offerList: snapshot.data,
-                  );
-                } else if (snapshot.hasError) {
-                  return ListView(
-                    shrinkWrap: true,
-                    children: [
-                      Text("Error"),
-                    ],
-                  );
-                }
+          if (widget.request.isSpecific == 0)
+            Expanded(
+              child: FutureBuilder(
+                future: futureOfferList,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return SpecficOfferList(
+                      offerList: snapshot.data,
+                    );
+                  } else if (snapshot.hasError) {
+                    return ListView(
+                      shrinkWrap: true,
+                      children: [
+                        Text("Error"),
+                      ],
+                    );
+                  }
 
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
-          )
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            )
         ],
       ),
     );

@@ -27,7 +27,7 @@ class _NewSpecificRequstDetailsScreenState
   TextEditingController roomController = TextEditingController();
   TextEditingController couponController = TextEditingController();
 
-  String category = "Select Catagory";
+  String category = "Select Category";
 
   List<Address> customerAddress;
 
@@ -210,17 +210,19 @@ class _NewSpecificRequstDetailsScreenState
         room: roomController.text,
       ).then(
         (address) => Request.createSpecificRequest(
-          offerID: widget.offer.offerID,
-          description: detailsController.text,
-          addressID: address,
-        ),
+            offerID: widget.offer.offerID,
+            description: detailsController.text,
+            addressID: address,
+            deliveryTime: widget.offer.deliveryTime,
+            deliverFrom: widget.offer.locationName),
       );
     } else {
       Request.createSpecificRequest(
-        offerID: widget.offer.offerID,
-        description: detailsController.text,
-        addressID: selectedAddress.addressID,
-      );
+          offerID: widget.offer.offerID,
+          description: detailsController.text,
+          addressID: selectedAddress.addressID,
+          deliveryTime: widget.offer.deliveryTime,
+          deliverFrom: widget.offer.locationName);
     }
 
     Navigator.pop(context);

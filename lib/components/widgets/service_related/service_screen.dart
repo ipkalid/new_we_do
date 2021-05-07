@@ -35,8 +35,10 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Expanded(
                   child: ActionButton(
                     label: "Cancel",
-                    onPressed: () =>
-                        (widget.service.status == "new") ? print("") : null,
+                    onPressed: () => (widget.service.status == "new")
+                        ? Service.changeStatus(
+                            widget.service.serviceID, "canceled")
+                        : null,
                     color: (widget.service.status == "new")
                         ? Colors.red
                         : Colors.grey,
