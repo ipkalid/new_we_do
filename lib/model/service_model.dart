@@ -63,9 +63,16 @@ class Service {
   }
 
   // UC30 - COMPLETE
-  Future<String> changeStatus(
-      String serviceID, String customerID, String newStatus) async {
-    // the real path should be "/api/customers/$customerID/services/$serviceID"
+  /*
+  statuses we have for services: {new, To The Store, At The Store, To The Camp, On The Way, Delivered, canceled, done}
+      these statuses will be used only to track the order and no special effect to them. 
+
+  For requests/offers: {wating, confirmed, payment, canceled, done, doneReported, doneRated, doneBoth}
+      these status will be used heavily in moving between the screens.
+    
+   */
+  Future<String> changeStatus(String serviceID, String newStatus) async {
+    // the real path should be "/api/customers/$globalUserID/services/$serviceID"
     NetworkHelper backend =
         NetworkHelper(url: Uri(path: "/api/services/$serviceID"));
 

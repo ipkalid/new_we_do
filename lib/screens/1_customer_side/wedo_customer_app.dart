@@ -29,7 +29,7 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
   void _goToDriverSide(BuildContext context) async {
     print(globalKfupmMail);
 
-    Customer.activateDriverSide(globalDriverId, globalKfupmMail);
+    Customer.activateDriverSide(globalKfupmMail);
     //Navigator.pushReplacementNamed(context, WeDoDriverApp.routeName);
   }
 

@@ -1,5 +1,5 @@
 import 'network_helper.dart';
-
+import 'package:we_do/helper/hive_preferences.dart';
 // you cant specify the reason for the weakness in the report...like mansour is the problem or etc...
 
 // revision is done
@@ -90,16 +90,15 @@ class Customer {
   }
 
   // UC02 - complete
-  static Future<String> activateDriverSide(
-      String customerID, String kfupmEmail) async {
+  static Future<String> activateDriverSide(String kfupmEmail) async {
     NetworkHelper backend = NetworkHelper(url: Uri(path: "/api/drivers"));
 
     var body = {
-      "customerID": customerID,
+      "customerID": globalUserId,
       "kfupmEmail": kfupmEmail,
     };
 
-    var response = await backend.postDataTemp(body);
+    var response = await backend.postData(body);
     print(response);
 
     return response;

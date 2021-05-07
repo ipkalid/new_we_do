@@ -22,21 +22,8 @@ class ServiceTrackScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Column(
-                      children: [
-                        Text(
-                          "Estemated Time",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black.withOpacity(.60),
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text("30 Minutes"),
-                      ],
-                    ),
                     Column(
                       children: [
                         Text(
@@ -56,7 +43,7 @@ class ServiceTrackScreen extends StatelessWidget {
             ),
           ),
           _TrackTimeline(
-            status: "atTheStore",
+            status: "${service.status}",
           ),
         ],
       ),
@@ -71,35 +58,56 @@ class _TrackTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(status);
     Color green = Colors.green;
     Color grey = Colors.grey;
 
-    bool toTheStore = true;
+    bool toTheStore = false;
     bool atTheStore = false;
+    bool toTheCamp = false;
     bool onTheWay = false;
     bool deliverid = false;
 
-    if (status == "toTheStore") {
+    if (status == "new") {
+      toTheStore = false;
+      atTheStore = false;
+      toTheCamp = false;
+      onTheWay = false;
+      deliverid = false;
+    }
+
+    if (status == "To The Store") {
       toTheStore = true;
       atTheStore = false;
+      toTheCamp = false;
       onTheWay = false;
       deliverid = false;
     }
-    if (status == "atTheStore") {
+    if (status == "At The Store") {
       toTheStore = true;
       atTheStore = true;
+      toTheCamp = false;
       onTheWay = false;
       deliverid = false;
     }
-    if (status == "onTheWay") {
+    if (status == "To The Camp") {
       toTheStore = true;
       atTheStore = true;
+      toTheCamp = true;
+      onTheWay = false;
+      deliverid = false;
+    }
+    if (status == "On The Way") {
+      toTheStore = true;
+      atTheStore = true;
+      toTheCamp = true;
       onTheWay = true;
       deliverid = false;
     }
-    if (status == "Deliverd") {
+    if (status == "Delivered") {
       toTheStore = true;
       atTheStore = true;
+      toTheCamp = true;
       onTheWay = true;
       deliverid = true;
     }
@@ -118,7 +126,7 @@ class _TrackTimeline extends StatelessWidget {
             ),
             endChild: const _RightChild(
               title: 'To The Store',
-              message: 'The captin is heading to the store.',
+              message: 'The captain is heading to the store.',
             ),
             afterLineStyle: LineStyle(
               color: (toTheStore) ? green : grey,
@@ -134,7 +142,7 @@ class _TrackTimeline extends StatelessWidget {
             ),
             endChild: _RightChild(
               title: 'At The Store',
-              message: 'The captin has areived to the store.',
+              message: 'The captain has arrived to the store.',
             ),
             beforeLineStyle: LineStyle(
               color: (atTheStore) ? green : grey,
@@ -148,12 +156,31 @@ class _TrackTimeline extends StatelessWidget {
             lineXY: 0.1,
             indicatorStyle: IndicatorStyle(
               width: 20,
+              color: (toTheCamp) ? green : grey,
+              padding: EdgeInsets.all(6),
+            ),
+            endChild: _RightChild(
+              title: 'To The Camp',
+              message: 'The captain is comming to the Camp.',
+            ),
+            beforeLineStyle: LineStyle(
+              color: (toTheCamp) ? green : grey,
+            ),
+            afterLineStyle: LineStyle(
+              color: (toTheCamp) ? green : grey,
+            ),
+          ),
+          TimelineTile(
+            alignment: TimelineAlign.manual,
+            lineXY: 0.1,
+            indicatorStyle: IndicatorStyle(
+              width: 20,
               color: (onTheWay) ? green : grey,
               padding: EdgeInsets.all(6),
             ),
             endChild: _RightChild(
               title: 'On the way',
-              message: 'The captin is coming to you.',
+              message: 'The captain is coming to you.',
             ),
             beforeLineStyle: LineStyle(
               color: (onTheWay) ? green : grey,

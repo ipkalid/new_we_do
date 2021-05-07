@@ -35,8 +35,11 @@ class _ServiceScreenState extends State<ServiceScreen> {
                 Expanded(
                   child: ActionButton(
                     label: "Cancel",
-                    onPressed: () => "",
-                    color: Colors.red,
+                    onPressed: () =>
+                        (widget.service.status == "new") ? print("") : null,
+                    color: (widget.service.status == "new")
+                        ? Colors.red
+                        : Colors.grey,
                     hideShadow: true,
                   ),
                 )
@@ -66,15 +69,30 @@ class _ServiceScreenState extends State<ServiceScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              "Driver",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Driver",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SpecificOfferCard(
+                  offer: widget.service.offer,
+                  fromServiceScreen: true,
+                ),
+              ),
+            ],
           ),
           Expanded(
             child: ListView(
@@ -106,7 +124,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             ),
                           ),
                           Text(
-                            "${widget.service.orderCost} SR",
+                            (widget.service.orderCost == null)
+                                ? "Not Yet"
+                                : "${widget.service.orderCost} SR",
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black.withOpacity(.5),
@@ -144,7 +164,9 @@ class _ServiceScreenState extends State<ServiceScreen> {
                             ),
                           ),
                           Text(
-                            "${widget.service.offer.deliveryPrice + widget.service.orderCost}",
+                            (widget.service.orderCost == null)
+                                ? "${widget.service.offer.deliveryPrice}"
+                                : "${widget.service.offer.deliveryPrice + widget.service.orderCost}",
                             style: TextStyle(
                               fontSize: 16,
                             ),

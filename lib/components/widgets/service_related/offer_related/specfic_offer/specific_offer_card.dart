@@ -50,13 +50,35 @@ class _SpecificOfferCardState extends State<SpecificOfferCard> {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                     ),
                     SizedBox(
-                      height: 14,
+                      height: (widget.fromServiceScreen) ? 8 : 14,
                     ),
-                    if (!widget.fromServiceScreen)
-                      Text(
-                        "Price ${widget.offer.deliveryPrice} SR",
-                        style: TextStyle(fontSize: 18),
-                      )
+                    !widget.fromServiceScreen
+                        ? Text(
+                            "Price ${widget.offer.deliveryPrice} SR",
+                            style: TextStyle(fontSize: 18),
+                          )
+                        : Row(children: [
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                            ),
+                            Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                            ),
+                          ])
                   ],
                 ),
               ),
