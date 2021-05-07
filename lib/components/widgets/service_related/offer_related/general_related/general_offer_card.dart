@@ -109,6 +109,101 @@ class GeneralOfferCard extends StatelessWidget {
     );
   }
 
+  /*
+  TODO: will be used once we have the time
+
+  Widget card() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+      height: 170,
+      decoration: BoxDecoration(
+        color: isDialog ? Colors.white : Color(0xffFAFAFA),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+        boxShadow: isDialog ? null : [AppColor.shadow],
+      ),
+      child: Row(
+        children: [
+          Column(
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage:
+                        NetworkImage("${offer.driver.customer.picURL}"),
+                    radius: 22,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    offer.driver.customer.name,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                child: Column(
+                  children: [
+                    Text(
+                      "Price",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "${offer.deliveryPrice} SAR",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    child: Icon(
+                      Icons.food_bank,
+                      size: 48,
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    offer.locationName,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                child: Column(
+                  children: [
+                    Text(
+                      "Time",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      "${offer.deliveryTime}",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+   */
+
   void _goTonewGeneralRequest(BuildContext context) {
     Navigator.push(
       context,
@@ -136,7 +231,7 @@ class MakeAnOfferDialog extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: ActionButton(
-            label: "Make a Requst",
+            label: "Make a Request",
             onPressed: () {
               onPressed();
               Navigator.pop(context);
