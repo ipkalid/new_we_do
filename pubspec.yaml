@@ -44,7 +44,9 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.0
   focus_detector: ^2.0.0
 
-
+#chatting
+  firebase_core: ^1.0.2
+  cloud_firestore: ^1.0.3
 
 
 

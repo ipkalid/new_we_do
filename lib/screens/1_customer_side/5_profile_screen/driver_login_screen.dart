@@ -36,6 +36,8 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
               onPressed: () {
                 globalKfupmMail = mailController.text;
                 widget.loginAsDriverPressed();
+
+                // TODO: take me to the driver side.
               },
             )
           ],
