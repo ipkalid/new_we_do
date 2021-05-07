@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:we_do/components/fab_bottom_app_bar/fab_bottom_app_bar.dart';
 import 'package:we_do/components/fab_bottom_app_bar/layout.dart';
+import 'package:we_do/helper/hive_preferences.dart';
+import 'package:we_do/model/customer_model.dart';
 import 'package:we_do/screens/1_customer_side/tab_navigator.dart';
 import 'package:we_do/screens/0_auth_screens/intro_screen.dart';
 import 'package:we_do/screens/1_customer_side/3_new_request/1_general_request/new_general_request_details_screen.dart';
@@ -25,7 +27,10 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
   }
 
   void _goToDriverSide(BuildContext context) async {
-    Navigator.pushReplacementNamed(context, WeDoDriverApp.routeName);
+    print(globalKfupmMail);
+
+    Customer.activateDriverSide(globalDriverId, globalKfupmMail);
+    //Navigator.pushReplacementNamed(context, WeDoDriverApp.routeName);
   }
 
   String _currentPage = "Offer";

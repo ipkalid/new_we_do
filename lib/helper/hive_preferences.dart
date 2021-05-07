@@ -3,6 +3,7 @@ import 'dart:async';
 
 var globalUserId;
 var globalDriverId;
+var globalKfupmMail;
 var globalWalletId;
 var globalPhoneNumber;
 

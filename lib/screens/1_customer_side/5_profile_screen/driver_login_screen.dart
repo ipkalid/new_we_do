@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
+import 'package:we_do/helper/hive_preferences.dart';
 
 class DriverLoginScreen extends StatefulWidget {
   DriverLoginScreen({Key key, @required this.loginAsDriverPressed})
@@ -32,7 +33,10 @@ class _DriverLoginScreenState extends State<DriverLoginScreen> {
             SizedBox(height: 64),
             ActionButton(
               label: "Log in",
-              onPressed: () => widget.loginAsDriverPressed(),
+              onPressed: () {
+                globalKfupmMail = mailController.text;
+                widget.loginAsDriverPressed();
+              },
             )
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
+import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/model/customer_model.dart';
 import 'package:we_do/screens/0_auth_screens/terms_and_conditions.dart';
 import 'package:we_do/screens/0_auth_screens/vertification_screen.dart';
@@ -44,9 +45,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
               label: "Name",
             ),
             SizedBox(height: 16),
-            RegularTextField(
-              controller: phoneNumberController,
-              label: "Phone Number",
+            Row(
+              children: [
+                Container(
+                  height: 48,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: Color(0xffF6F6F6),
+                    border: Border.all(
+                      color: Color(0xffE8E8E8),
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text("+966"),
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: RegularTextField(
+                    controller: phoneNumberController,
+                    keyboardType: TextInputType.number,
+                    label: "Phone Number",
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 16),
             RegularTextField(
@@ -116,9 +141,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           Box currentUser = await Hive.openBox<String>("currentUser");
           // Assigning the user info to the hive database (aka offline database)
           currentUser.put("customerID", response.customerID);
+          globalUserId = response.customerID;
           currentUser.put("phoneNumber", response.phoneNumber);
+          globalPhoneNumber = response.phoneNumber;
           currentUser.put("walletID", response.walletID);
-
+          globalWalletId = response.walletID;
           goToWeDoCustomerApp();
         }
       }
