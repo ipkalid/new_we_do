@@ -124,7 +124,7 @@ class Request {
     NetworkHelper backend = NetworkHelper(
         url: Uri(path: "/api/customers/$globalUserId/requests"),
         query: "status=wating");
-
+    print(globalUserId);
 //TODO: FIX it line  116 wating
     var response = await backend.getData({});
 
