@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wedo_try/view/component/text_field_with_label.dart';
+import 'text_field_with_label.dart';
 import '../../style/style.dart';
 import '../../style/constant.dart';
 

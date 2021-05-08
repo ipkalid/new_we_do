@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../style.dart';
-import '../../constant.dart';
+import '../../style/style.dart';
+import '../../style/constant.dart';
 
 class AddressButton extends StatelessWidget {
   final String addressName;

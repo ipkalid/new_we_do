@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wedo_try/style/style.dart';
+import '../../style/style.dart';
 
 class SelectButton extends StatelessWidget {
   SelectButton(

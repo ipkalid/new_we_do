@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wedo_try/model/offer_model.dart';
+import '../../model/offer_model.dart';
 import '../../style/style.dart';
 import '../../style/constant.dart';
 
