@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/helper/helper_method.dart';
+import 'package:we_do/components/text_field/regular%20text_field.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/request_model.dart';
-import 'package:we_do/screens/1_customer_side/3_new_request/2_specfic_request/new_specfic_request_screen.dart';
 import 'package:we_do/style/app_color.dart';
 
 class GeneralRequestCard extends StatelessWidget {
@@ -14,14 +14,11 @@ class GeneralRequestCard extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print("")
-      // HelperMethods.showSimpleDialog(
-      //     context: context,
-      //     child: MakeAnOfferDialog(
-      //       offer: request,
-      //       onPressed: () => "_goTonewGeneralRequest(context)",
-      //     ))
-      ,
+      onTap: () => HelperMethods.showSimpleDialog(
+          context: context,
+          child: MakeAnOfferDialog(
+            request: request,
+          )),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         height: 170,
@@ -53,13 +50,6 @@ class GeneralRequestCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Container(
-                      child: Icon(
-                        Icons.food_bank,
-                        size: 48,
-                      ),
-                    ),
-                    SizedBox(width: 8),
                     Text(
                       request.deliverFrom,
                       style:
@@ -219,28 +209,44 @@ class GeneralRequestCard extends StatelessWidget {
 }
 
 class MakeAnOfferDialog extends StatelessWidget {
-  const MakeAnOfferDialog({Key key, this.offer, this.onPressed})
-      : super(key: key);
-  final Request offer;
-  final void Function() onPressed;
+  const MakeAnOfferDialog({Key key, this.request}) : super(key: key);
+  final Request request;
+  //final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
+    var priceController = TextEditingController();
     return Column(
       children: [
         GeneralRequestCard(
-          request: offer,
+          request: request,
           isDialog: true,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          child: RegularTextField(
+            controller: priceController,
+            label: "Your Price",
+            withLabel: true,
+            keyboardType: TextInputType.number,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: ActionButton(
-            label: "Make a Request",
+            label: "Make An Offer",
             onPressed: () {
-              onPressed();
-              Navigator.pop(context);
+              print(priceController.text);
+              var price = priceController.text;
+              Offer.createSpecificOffer2(
+                      requestID: request.requestID,
+                      locationName: request.deliverFrom,
+                      deliveryPrice: double.parse(price),
+                      deliveryTime: request.deliveryTime)
+                  .then((value) => Navigator.pop(context));
 
-              print("object");
+              // Navigator.pop(context);
+              // print("object");
             },
             hideShadow: true,
           ),

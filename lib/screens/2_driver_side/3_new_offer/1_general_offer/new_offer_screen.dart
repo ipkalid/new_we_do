@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/buttons/select_button.dart';
 import 'package:we_do/components/text_field/regular%20text_field.dart';
+import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/style/app_color.dart';
 
 class NewOfferScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _NewOfferScreenState extends State<NewOfferScreen> {
   TextEditingController placeController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController deliveryPriceController = TextEditingController();
-  TextEditingController maxPriceController = TextEditingController();
+
   TextEditingController deilveryTimeController = TextEditingController();
 
   TextEditingController detailsController = TextEditingController();
@@ -54,25 +55,19 @@ class _NewOfferScreenState extends State<NewOfferScreen> {
           ),
           SizedBox(height: 30),
           RegularTextField(
-            controller: timeController,
+            controller: placeController,
             label: "Place",
             withLabel: true,
           ),
           SizedBox(height: 16),
           RegularTextField(
-            controller: timeController,
+            controller: deliveryPriceController,
             label: "Delivery Price",
             withLabel: true,
           ),
           SizedBox(height: 16),
           RegularTextField(
-            controller: timeController,
-            label: "Max Price",
-            withLabel: true,
-          ),
-          SizedBox(height: 16),
-          RegularTextField(
-            controller: timeController,
+            controller: deilveryTimeController,
             label: "Delivery Time",
             withLabel: true,
           ),
@@ -80,7 +75,12 @@ class _NewOfferScreenState extends State<NewOfferScreen> {
           ActionButton(
             label: 'Send Your Offer',
             onPressed: () {
-              print("place");
+              Offer.createGeneralOffer2(
+                deliveryPrice: double.parse(deliveryPriceController.text),
+                deliveryTime: deilveryTimeController.text,
+                offerType: category,
+                locationName: placeController.text,
+              ).then((value) => Navigator.pop(context));
             },
           )
         ],

@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/model/customer_model.dart';
 
 import 'driver_model.dart';
 import 'network_helper.dart';
 import 'request_model.dart';
+import 'package:http/http.dart' as http;
 
 // revised
 
@@ -144,24 +148,98 @@ class Offer {
     return response;
   }
 
+  static Future<bool> createSpecificOffer2({
+    @required String requestID,
+    @required double deliveryPrice,
+    @required String locationName,
+    @required String deliveryTime,
+  }) async {
+    var url = Uri.parse(
+        "http://15.184.68.150:3000/api/drivers/$globalDriverId/offers?isSpecific=1");
+
+    Map<String, String> header = {
+      "Content-Type": "application/json",
+    };
+
+    final response = await http.post(
+      url,
+      headers: header,
+      body: jsonEncode({
+        "requestID": requestID,
+        "deliveryPrice": deliveryPrice,
+        "deliveryTime": deliveryTime,
+        "locationName": locationName,
+      }),
+    );
+    debugPrintURL2(response);
+    if (response.statusCode == 200) {
+      //var otbToken = json.decode(response.body)["data"]["otpToken"];
+      print("Work");
+      return true;
+    } else {
+      var message = json.decode(response.body)["massage"];
+
+      throw Exception('Failed to load the data');
+    }
+  }
+
   // UC27 - COMPLETE
-  static Future<String> createGeneralOffer(String deliveryTime,
-      String offerType, String locationName, double deliveryPrice) async {
+  static Future<String> createGeneralOffer(
+      {String deliveryTime,
+      String offerType,
+      String locationName,
+      double deliveryPrice}) async {
     NetworkHelper backend = NetworkHelper(
         url: Uri(
-            path: "/api/customers/$globalDriverId/Offers",
-            query: "isSpecific=1"));
+          path: "/api/drivers/$globalDriverId/Offers",
+        ),
+        query: "isSpecific=1");
 
-    var body = {
+    Map<String, dynamic> body = {
       "deliveryPrice": deliveryPrice,
       "deliveryTime": deliveryTime,
       "offerType": offerType,
       "locationName": locationName,
     };
-
+    print("Something");
     var response = await backend.postData(body);
 
     return response;
+  }
+
+  static Future<bool> createGeneralOffer2({
+    @required String deliveryTime,
+    @required String offerType,
+    @required String locationName,
+    @required double deliveryPrice,
+  }) async {
+    var url = Uri.parse(
+        "http://15.184.68.150:3000/api/drivers/$globalDriverId/offers");
+
+    Map<String, String> header = {
+      "Content-Type": "application/json",
+    };
+
+    final response = await http.post(
+      url,
+      headers: header,
+      body: jsonEncode({
+        "deliveryPrice": deliveryPrice,
+        "deliveryTime": deliveryTime,
+        "offerType": offerType,
+        "locationName": locationName,
+      }),
+    );
+    debugPrintURL2(response);
+    if (response.statusCode == 200) {
+      var otbToken = json.decode(response.body)["data"]["otpToken"];
+
+      return true;
+    } else {
+      var message = json.decode(response.body)["massage"];
+
+      throw Exception('Failed to load the data');
+    }
   }
 
   // UC28 - COMPLETE
