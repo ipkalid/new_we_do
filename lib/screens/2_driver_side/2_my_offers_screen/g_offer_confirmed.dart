@@ -55,6 +55,7 @@ class _SRequestConfirmedState extends State<SRequestConfirmed> {
                         setState(() {
                           theRequest.status = "On The Way";
                         });
+
                       },
                       text: "On The Way",
                       buttonColor: Color(0xFF7AA4E3),

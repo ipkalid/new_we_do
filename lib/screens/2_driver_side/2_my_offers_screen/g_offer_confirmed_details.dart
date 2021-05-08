@@ -58,6 +58,7 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
   }
 
   Widget _buildPopupDialog(BuildContext context) {
+    Service statusChange;
     return MaterialButton(
         onPressed: () {
           Navigator.pop(context);
@@ -94,6 +95,7 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                             servicesList[i].status = "To The Store";
                           }
                         });
+                        changeAllServicesStatus(servicesList, "To The Store");
                       },
                       text: "To The Store",
                       buttonColor: Color(0xFF7AA4E3),
@@ -112,6 +114,8 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                             servicesList[i].status = "At The Store";
                           }
                         });
+                        changeAllServicesStatus(servicesList, "At The Store");
+
                       },
                       text: "At The Store",
                       buttonColor: Color(0xFFEFEFEF),
@@ -130,6 +134,7 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                             servicesList[i].status = "To The Camp";
                           }
                         });
+                        changeAllServicesStatus(servicesList, "To The Camp");
                       },
                       text: "To The Camp",
                       textColor: Colors.black,
@@ -146,7 +151,7 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
   // TODO: FIX THE SERVICE PROBLEM
   void changeAllServicesStatus(List<Service> listOfServices, newStatus) {
     for (int i = 0; i < listOfServices.length; i++) {
-      //  listOfServices[i].changeStatus(newStatus);
+      Service.changeStatus(listOfServices[i].serviceID , newStatus);
     }
   }
 
@@ -233,7 +238,6 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                             context: context,
                             builder: (BuildContext context) =>
                                 _buildPopupDialog(context),
-
                           );
                           
                         },
