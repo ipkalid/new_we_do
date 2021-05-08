@@ -109,6 +109,7 @@ class _MyOffersScreenState extends State<MyOffersScreen> {
                     if (snapshot.hasData) {
                       return RequestList(
                         serviceList: snapshot.data,
+                        fromDriverSide: true,
                       );
                     } else if (snapshot.hasError) {
                       return ListView(

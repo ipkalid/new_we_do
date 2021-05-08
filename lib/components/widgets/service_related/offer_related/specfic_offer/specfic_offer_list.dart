@@ -5,7 +5,7 @@ import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/request_model.dart';
 
 class SpecficOfferList extends StatelessWidget {
-  SpecficOfferList({@required this.offerList, this.requestList});
+  SpecficOfferList({this.offerList, this.requestList});
   final List<Offer> offerList;
   final List<Request> requestList;
 

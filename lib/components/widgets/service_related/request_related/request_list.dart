@@ -4,9 +4,11 @@ import 'package:we_do/model/request_model.dart';
 import 'package:we_do/model/service_model.dart';
 
 class RequestList extends StatelessWidget {
-  RequestList({this.requestList, this.serviceList});
+  RequestList(
+      {this.requestList, this.serviceList, this.fromDriverSide = false});
   final List<Request> requestList;
   final List<Service> serviceList;
+  final bool fromDriverSide;
 
   List<Widget> _addRequestsList() {
     List<Widget> requestCardsList = [];
@@ -23,8 +25,14 @@ class RequestList extends StatelessWidget {
               bottom: i == (requestListt.length - 1) ? 30 : 0),
           child: Center(
             child: (requestList == null)
-                ? RequestCard(service: requestListt[i])
-                : RequestCard(request: requestListt[i]),
+                ? RequestCard(
+                    service: requestListt[i],
+                    fromDriverSide: fromDriverSide,
+                  )
+                : RequestCard(
+                    request: requestListt[i],
+                    fromDriverSide: fromDriverSide,
+                  ),
           ),
         ),
       );

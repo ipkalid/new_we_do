@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/widgets/service_related/request_related/request_screen.dart';
 import 'package:we_do/components/widgets/service_related/service_screen.dart';
+import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/request_model.dart';
 import 'package:we_do/model/service_model.dart';
+import 'package:we_do/screens/2_driver_side/2_my_offers_screen/g_offer_confirmed_details.dart';
 
 class RequestCard extends StatelessWidget {
-  RequestCard({this.request, this.service});
+  RequestCard({this.request, this.service, this.fromDriverSide});
   final Request request;
   final Service service;
+  final bool fromDriverSide;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => (service == null)
-          ? _goRequestScreen(context)
-          : _goServiceScreen(context),
+      onTap: () => fromDriverSide
+          ? _gotoGOfferConfirmedDetails(context)
+          : (service == null)
+              ? _goRequestScreen(context)
+              : _goServiceScreen(context),
       child: Container(
         height: 85,
         decoration: BoxDecoration(
@@ -93,5 +98,19 @@ class RequestCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _gotoGOfferConfirmedDetails(BuildContext context) async {
+    Service().getAnOfferServices(service.offerID).then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GOfferConfirmedDetails(
+            servicesList: value,
+            theOffer: service.offer,
+          ),
+        ),
+      );
+    });
   }
 }

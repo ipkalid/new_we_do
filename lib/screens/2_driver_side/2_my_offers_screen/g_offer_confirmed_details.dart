@@ -194,11 +194,11 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                     rating: theOffer
                         .driver.rating, //allRequests[0].offer.driver.rating
                     orderName:
-                        "theOffer.locationName", //allRequests[0].offer.locationName
+                        "${theOffer.locationName}", //allRequests[0].offer.locationName
                     price: theOffer
                         .deliveryPrice, //allRequests[0].offer.deliveryPrice
                     time:
-                        "theOffer.deliveryTime", //allRequests[0].offer.deliveryTime
+                        "${theOffer.deliveryTime}", //allRequests[0].offer.deliveryTime
                   ),
                   SizedBox(
                     height: 30,
@@ -224,8 +224,8 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 20),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
                     child: MainButton(
                       onPressed: () {
                         showDialog(
