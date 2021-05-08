@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:we_do/components/widgets/service_related/offer_related/specfic_offer/specific_offer_card.dart';
 
 import 'package:we_do/model/offer_model.dart';
+import 'package:we_do/model/request_model.dart';
 
 class SpecficOfferList extends StatelessWidget {
-  SpecficOfferList({@required this.offerList});
+  SpecficOfferList({@required this.offerList, this.requestList});
   final List<Offer> offerList;
+  final List<Request> requestList;
 
   List<Widget> _addOfferList() {
     List<Widget> offers = [];
@@ -24,6 +26,25 @@ class SpecficOfferList extends StatelessWidget {
       );
     }
     return offers;
+  }
+
+  List<Widget> _addRequestList() {
+    List<Widget> requests = [];
+    for (var i = 0; i < requestList.length; i++) {
+      requests.add(
+        Padding(
+          padding: EdgeInsets.only(
+              top: i == 0 ? 30 : 12,
+              bottom: i == (requestList.length - 1) ? 30 : 0),
+          child: Center(
+            child: SpecificOfferCard(
+              request: requestList[i],
+            ),
+          ),
+        ),
+      );
+    }
+    return requests;
   }
 
   @override

@@ -4,8 +4,9 @@ import 'package:we_do/components/widgets/service_related/offer_related/general_r
 import 'package:we_do/model/offer_model.dart';
 
 class GeneralOfferList extends StatelessWidget {
-  GeneralOfferList({@required this.offerList});
+  GeneralOfferList({@required this.offerList, this.fromDriverSide = false});
   final List<Offer> offerList;
+  final fromDriverSide;
 
   List<Widget> _addOfferList() {
     List<Widget> offers = [];
@@ -18,6 +19,7 @@ class GeneralOfferList extends StatelessWidget {
           child: Center(
             child: GeneralOfferCard(
               offer: offerList[i],
+              fromDriverSide: fromDriverSide,
             ),
           ),
         ),

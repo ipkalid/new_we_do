@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/components/helper/helper_method.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/offer_detailes.dart';
 import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/screens/1_customer_side/3_new_request/2_specfic_request/new_specfic_request_screen.dart';
 import 'package:we_do/style/app_color.dart';
 
 class GeneralOfferCard extends StatelessWidget {
-  GeneralOfferCard({Key key, this.offer, this.isDialog = false})
+  GeneralOfferCard(
+      {Key key, this.offer, this.isDialog = false, this.fromDriverSide = false})
       : super(key: key);
   final Offer offer;
   final bool isDialog;
+  final bool fromDriverSide;
 
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => HelperMethods.showSimpleDialog(
-          context: context,
-          child: MakeAnOfferDialog(
-            offer: offer,
-            onPressed: () => _goTonewGeneralRequest(context),
-          )),
+      onTap: () => !fromDriverSide
+          ? _goToOfferDetails(context)
+          : !isDialog
+              ? HelperMethods.showSimpleDialog(
+                  context: context,
+                  child: MakeAnOfferDialog(
+                    offer: offer,
+                    onPressed: () => _goTonewGeneralRequest(context),
+                  ))
+              : null,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         height: 170,
@@ -203,6 +210,17 @@ class GeneralOfferCard extends StatelessWidget {
     );
   }
    */
+
+  void _goToOfferDetails(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => OfferDetails(
+          offer: offer,
+        ),
+      ),
+    );
+  }
 
   void _goTonewGeneralRequest(BuildContext context) {
     Navigator.push(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:we_do/components/widgets/service_related/offer_related/general_related/general_offer_list.dart';
 import 'package:we_do/components/widgets/service_related/request_related/request_list.dart';
 import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/model/offer_model.dart';
-import 'package:we_do/model/request_model.dart';
 import 'package:we_do/model/service_model.dart';
 import 'package:we_do/style/app_color.dart';
 
@@ -16,9 +16,6 @@ class MyOffersScreen extends StatefulWidget {
 class _MyOffersScreenState extends State<MyOffersScreen> {
   Future<List<Offer>> futureOffersList;
   Future<List<Service>> futureServicesList;
-
-  //getmyWaitingOffers
-  //getMy
 
   void _getWaitingOffersList() {
     futureOffersList = Offer.getMyWaitingOffers();
@@ -77,8 +74,9 @@ class _MyOffersScreenState extends State<MyOffersScreen> {
                   future: futureOffersList,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return RequestList(
-                        requestList: snapshot.data,
+                      return GeneralOfferList(
+                        fromDriverSide: true,
+                        offerList: snapshot.data,
                       );
                     } else if (snapshot.hasError) {
                       return ListView(

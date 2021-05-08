@@ -166,4 +166,19 @@ class Service {
   // }
 
   Future<Service> createService(String offerID, String requestID) {}
+  static Future<List<Service>> getCustomerClosedServices() async {
+    NetworkHelper backend = NetworkHelper(
+        url: Uri(path: "/api/customers/$globalUserId/services"),
+        query: "status=delivered");
+    Map<String, String> header = {
+      "embed": "request{address{customer}}, offer{driver{customer}}"
+    };
+    var response = await backend.getData(header);
+    List<Service> allServices = [];
+    var aService;
+    for (aService in response) {
+      allServices.add(Service.fromJson(aService));
+    }
+    return allServices;
+  }
 }

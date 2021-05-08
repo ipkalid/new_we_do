@@ -116,14 +116,10 @@ class Offer {
     NetworkHelper backend = NetworkHelper(
         url: Uri(path: "/api/requests"),
         query: "isSpecific=1&offerID=$offerID");
-
-    Map<String, String> header = {"embed": "customer"};
-
+    Map<String, String> header = {"embed": "customer, address"};
     var response = await backend.getData(header);
-
     List<Request> allRequests = [];
     var aRequest;
-
     for (aRequest in response) {
       allRequests.add(Request.fromJson(aRequest));
     }
@@ -275,7 +271,7 @@ class Offer {
         url: Uri(path: "/api/drivers/$globalDriverId/offers"),
         query: "status=wating");
 
-    var response = await backend.getData({});
+    var response = await backend.getData({"embed": "driver{customer}"});
 
     List<Offer> allOffer = [];
     var anOffer;

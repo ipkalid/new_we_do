@@ -67,6 +67,7 @@ class _OfferScreenState extends State<OfferScreen> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return GeneralOfferList(
+                  fromDriverSide: true,
                   offerList: snapshot.data,
                 );
               } else if (snapshot.hasError) {

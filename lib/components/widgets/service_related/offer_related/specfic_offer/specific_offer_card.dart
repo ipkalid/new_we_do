@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
 import 'package:we_do/model/offer_model.dart';
+import 'package:we_do/model/request_model.dart';
 import 'package:we_do/style/app_color.dart';
 
 class SpecificOfferCard extends StatefulWidget {
-  SpecificOfferCard({this.offer, this.fromServiceScreen = false});
+  SpecificOfferCard({this.offer, this.fromServiceScreen = false, this.request});
   final Offer offer;
   final bool fromServiceScreen;
+  final Request request;
 
   @override
   _SpecificOfferCardState createState() => _SpecificOfferCardState();
@@ -32,7 +34,9 @@ class _SpecificOfferCardState extends State<SpecificOfferCard> {
               radius: 28,
               backgroundImage: NetworkImage(
                 (widget.offer.driver.customer.picURL != null)
-                    ? "${widget.offer.driver.customer.picURL}"
+                    ? (widget.request == null)
+                        ? "${widget.offer.driver.customer.picURL}"
+                        : "${widget.request.customer.picURL}"
                     : "",
               ),
             ),
@@ -54,7 +58,9 @@ class _SpecificOfferCardState extends State<SpecificOfferCard> {
                     ),
                     !widget.fromServiceScreen
                         ? Text(
-                            "Price ${widget.offer.deliveryPrice} SR",
+                            (widget.request == null)
+                                ? "Price ${widget.offer.deliveryPrice} SR"
+                                : "Bulding: ${widget.request.address.buildingNo}",
                             style: TextStyle(fontSize: 18),
                           )
                         : Row(children: [
