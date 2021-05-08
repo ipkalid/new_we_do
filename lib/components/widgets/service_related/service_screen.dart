@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/action_button.dart';
+import 'package:we_do/components/widgets/service_related/chat_screen.dart';
 import 'package:we_do/components/widgets/service_related/offer_related/specfic_offer/specific_offer_card.dart';
 import 'package:we_do/components/widgets/service_related/track_screen.dart';
-import 'package:we_do/model/offer_model.dart';
 import 'package:we_do/model/service_model.dart';
 
 class ServiceScreen extends StatefulWidget {
@@ -198,7 +198,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         label: "Chat",
                         hideShadow: true,
                         color: Color(0xff7DAD40),
-                        onPressed: () {},
+                        onPressed: () => _goToChatScreen(),
                       ),
                     ),
                   ],
@@ -217,6 +217,17 @@ class _ServiceScreenState extends State<ServiceScreen> {
       MaterialPageRoute(
         builder: (context) => ServiceTrackScreen(
           service: widget.service,
+        ),
+      ),
+    );
+  }
+
+  void _goToChatScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChattingPage(
+          serviceID: widget.service.serviceID,
         ),
       ),
     );

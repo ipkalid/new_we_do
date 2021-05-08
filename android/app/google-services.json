@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "195863081251",
+    "project_id": "wedo-280e2",
+    "storage_bucket": "wedo-280e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195863081251:android:c6f01e2cd3f2eda5741c96",
+        "android_client_info": {
+          "package_name": "com.wedo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195863081251-7tlnu23q30504vptn89gej0qj8eiacfg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4pWITbejftsPmPavQ3U7fCvws63RFvsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195863081251-7tlnu23q30504vptn89gej0qj8eiacfg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

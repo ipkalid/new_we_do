@@ -73,7 +73,7 @@ class _OfferScreenState extends State<OfferScreen> {
                 return ListView(
                   shrinkWrap: true,
                   children: [
-                    Text("Error"),
+                    Text(snapshot.error.toString()),
                   ],
                 );
               }

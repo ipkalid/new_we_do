@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -10,6 +11,8 @@ import 'package:we_do/style/app_theme.dart';
 var globalRoute;
 void main() async {
   await Hive.initFlutter();
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   Box currentUser = await Hive.openBox<String>("currentUser");
 
   globalUserId = currentUser.get("customerID");
