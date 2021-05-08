@@ -142,7 +142,7 @@ class _TrackTimeline extends StatelessWidget {
             ),
             endChild: _RightChild(
               title: 'At The Store',
-              message: 'The captain has arrived to the store and is ordering.',
+              message: 'The captain has arrived to the store.',
             ),
             beforeLineStyle: LineStyle(
               color: (atTheStore) ? green : grey,
