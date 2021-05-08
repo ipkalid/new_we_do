@@ -18,23 +18,24 @@ class _CustomerAccountState extends State<CustomerAccount> {
   WedoAppBar appbar = WedoAppBar();
 
   Customer local;
-  getCustomer() async{
-
+  getCustomer() async {
     String phoneNumber = globalPhoneNumber;
     local = await Customer.signIn(phoneNumber);
   }
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
+
+    print("object");
     getCustomer();
   }
 
   @override
   Widget build(BuildContext context) {
-    String customerName = local.name;
+    String customerName = "local.name";
 
-    int rating = local.rating as int;
+    int rating = 2; //"local.rating as int";
 
     List<Widget> customerRating = [];
 
@@ -108,7 +109,7 @@ class _CustomerAccountState extends State<CustomerAccount> {
                               onPressed: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return EditProfile(local: local,);
+                                  return EditProfile();
                                 }));
                               }),
                         ),

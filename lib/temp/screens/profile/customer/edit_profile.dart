@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/model/customer_model.dart';
 import '../../../../style/style.dart';
 import '../../../components/button_with_icon.dart';
@@ -10,18 +11,23 @@ import 'change_password.dart';
 import 'select_address.dart';
 
 class EditProfile extends StatefulWidget {
-  final Customer local;
-
-  const EditProfile({Key key, this.local}) : super(key: key);
+  EditProfile();
   @override
-  _EditProfileState createState() => _EditProfileState(local);
+  _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  Customer local;
 
-  final Customer local;
-  _EditProfileState(this.local);
+  Future<void> getCustomer() async {
+    local = await Customer.signIn(globalPhoneNumber);
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    getCustomer();
+  }
 
   String newUserName;
   String newPhoneNumber;
@@ -35,10 +41,11 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar.appbar(
-        title: "Profile",
-        onPressed: (){Navigator.pop(context);},
-        pageContext: context
-      ),
+          title: "Profile",
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          pageContext: context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(25, 25, 25, 0),
@@ -61,33 +68,37 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                 ),
-                SizedBox(height: 30,),
+                SizedBox(
+                  height: 30,
+                ),
                 Center(child: message),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 TextFieldWithLabel(
-                    onChanged: (value){
-                      if(value == ''){
-                        nameBorderColor = Colors.red;
-                        correctFields = false;
-                      }
-                      else {
-                        newUserName = value;
-                        nameBorderColor = fieldBorderColor;
-                      }
-                    },
+                  onChanged: (value) {
+                    if (value == '') {
+                      nameBorderColor = Colors.red;
+                      correctFields = false;
+                    } else {
+                      newUserName = value;
+                      nameBorderColor = fieldBorderColor;
+                    }
+                  },
                   label: "Name",
                   //TODO: use the real variables
                   hintText: local.name,
                   borderColor: nameBorderColor,
-                    ),
-                SizedBox(height: 20,),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 TextFieldWithLabel(
-                  onChanged: (value){
-                    if(value == ''){
+                  onChanged: (value) {
+                    if (value == '') {
                       correctFields = false;
                       phoneNumberBorderColor = Colors.red;
-                    }
-                    else {
+                    } else {
                       newPhoneNumber = value;
                       phoneNumberBorderColor = fieldBorderColor;
                     }
@@ -97,40 +108,63 @@ class _EditProfileState extends State<EditProfile> {
                   inputType: TextInputType.number,
                   borderColor: phoneNumberBorderColor,
                 ),
-                SizedBox(height: 20,),
-                ButtonWithIcon(icon: Icons.vpn_key_outlined, text: "Change Password", onPressed: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
+                SizedBox(
+                  height: 20,
+                ),
+                ButtonWithIcon(
+                    icon: Icons.vpn_key_outlined,
+                    text: "Change Password",
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return ChangePassword();
                       }));
-                }),
-                SizedBox(height: 20,),
-                ButtonWithIcon(icon: Icons.location_on_outlined, text: "Address", onPressed: (){
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
+                    }),
+                SizedBox(
+                  height: 20,
+                ),
+                ButtonWithIcon(
+                    icon: Icons.location_on_outlined,
+                    text: "Address",
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return SelectAddress();
                       }));
-                }),
-                SizedBox(height: 80,),
-                MainButton(onPressed: (){
-                  setState(() {
-                    if(!correctFields){
-                      message = Text("Please fill the empty fields", style: warningTextStyle(context),);
-                    }else{
-                      //TODO: update the profile in the database
-                      if (local.name != newUserName && newUserName != ''){
-                        local.name = newUserName;
-                        local.changeData();
-                      }
-                      if (local.phoneNumber != newPhoneNumber && newPhoneNumber != ''){
-                        local.phoneNumber = newPhoneNumber;
-                        local.changeData();
-                      }
-                      message = Text("Your profile has been updated", style: successfulTextStyle(context),);
-                    }
-                  });
-                }, text: "Save"),
-                SizedBox(height: 30,)
+                    }),
+                SizedBox(
+                  height: 80,
+                ),
+                MainButton(
+                    onPressed: () {
+                      setState(() {
+                        if (!correctFields) {
+                          message = Text(
+                            "Please fill the empty fields",
+                            style: warningTextStyle(context),
+                          );
+                        } else {
+                          //TODO: update the profile in the database
+                          if (local.name != newUserName && newUserName != '') {
+                            local.name = newUserName;
+                            local.changeData();
+                          }
+                          if (local.phoneNumber != newPhoneNumber &&
+                              newPhoneNumber != '') {
+                            local.phoneNumber = newPhoneNumber;
+                            local.changeData();
+                          }
+                          message = Text(
+                            "Your profile has been updated",
+                            style: successfulTextStyle(context),
+                          );
+                        }
+                      });
+                    },
+                    text: "Save"),
+                SizedBox(
+                  height: 30,
+                )
               ],
             ),
           ),

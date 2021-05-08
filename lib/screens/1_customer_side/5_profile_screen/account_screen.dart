@@ -4,6 +4,7 @@ import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/driver_login_screen.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/wallet_screen.dart';
 import 'package:we_do/temp/screens/profile/customer/customer_account.dart';
+import 'package:we_do/temp/screens/profile/customer/edit_profile.dart';
 
 class AccountScreen extends StatefulWidget {
   AccountScreen(
@@ -36,10 +37,10 @@ class _AccountScreenState extends State<AccountScreen> {
           SettingButton(
             label: "Profile",
             icon: Icons.person_outline,
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) {
-                  return CustomerAccount();
-                })),
+            onPressed: () =>
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return EditProfile();
+            })),
           ),
           SettingButton(
             label: "Wallet",

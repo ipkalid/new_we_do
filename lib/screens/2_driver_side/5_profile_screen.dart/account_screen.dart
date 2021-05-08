@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/setting_button.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/wallet_screen.dart';
+import 'package:we_do/temp/screens/profile/customer/edit_profile.dart';
 import 'package:we_do/temp/screens/profile/driver/driver_account.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -34,10 +35,10 @@ class _AccountScreenState extends State<AccountScreen> {
           SettingButton(
             label: "Profile",
             icon: Icons.person_outline,
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) {
-                  return DriverAccount();
-                })),
+            onPressed: () =>
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return EditProfile();
+            })),
           ),
           SettingButton(
             label: "Wallet",

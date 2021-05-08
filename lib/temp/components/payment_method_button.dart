@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../style/style.dart';
-import '../../style/constant.dart';
+import 'package:we_do/style/constant.dart';
+import 'package:we_do/style/style.dart';
+
 
 class PaymentMethodButton extends StatelessWidget {
   final void Function() onPressed;
