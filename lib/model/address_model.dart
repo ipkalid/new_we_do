@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:we_do/helper/hive_preferences.dart';
 
+import 'customer_model.dart';
 import 'network_helper.dart';
 
 class Address {
+  Customer customer;
+
   String customerID;
   String addressID;
   String name;
@@ -24,7 +27,13 @@ class Address {
       this.description});
 
   Address.fromJson(Map<String, dynamic> json) {
-    customerID = json["customerID"];
+    if (json.containsKey("customerID"))
+      customerID = json["customerID"];
+    else {
+      customer = Customer.fromJson(json["customer"]);
+      customerID = customer.customerID;
+    }
+
     addressID = json["addressID"];
     name = json["name"];
     latitude = json["latitude"];
