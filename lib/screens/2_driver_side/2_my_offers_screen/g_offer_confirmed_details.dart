@@ -212,35 +212,42 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                 ],
               ),
             ),
-            Container(
-              color: fieldBorderColor,
-              // TODO: MOVE TO CONSTANTS
-              height: 0.65 * displayHeight(context),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: getServicesList(context),
+            Expanded(
+              child: Container(
+                color: fieldBorderColor,
+                // TODO: MOVE TO CONSTANTS
+                //height: 0.4 * displayHeight(context),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: getServicesList(context),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-                    child: MainButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              _buildPopupDialog(context),
-                        );
-                      },
-                      text: "Change Status",
-                      buttonColor: mainOrange,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 0),
+                      child: MainButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                _buildPopupDialog(context),
+
+                          );
+                          
+                        },
+                        text: "Change Status",
+                        buttonColor: mainOrange,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
+            SizedBox(
+              height: 50,
+            )
           ],
         ),
       ),
