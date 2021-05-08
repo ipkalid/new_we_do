@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:we_do/components/fab_bottom_app_bar/fab_bottom_app_bar.dart';
 import 'package:we_do/components/fab_bottom_app_bar/layout.dart';
 import 'package:we_do/screens/0_auth_screens/intro_screen.dart';
+import 'package:we_do/screens/1_customer_side/wedo_customer_app.dart';
 import 'package:we_do/screens/2_driver_side/3_new_offer/1_general_offer/new_offer_screen.dart';
 import 'package:we_do/screens/2_driver_side/tab_navigator_driver.dart';
 import 'package:we_do/style/app_color.dart';
@@ -15,6 +17,11 @@ class WeDoDriverApp extends StatefulWidget {
 
 class _WeDoDriverAppState extends State<WeDoDriverApp> {
   void _goToLogOut(BuildContext context) async {
+    Box currentUser = await Hive.openBox<String>("currentUser");
+    currentUser.delete("customerID");
+    currentUser.delete("phoneNumber");
+    currentUser.delete("walletID");
+    currentUser.delete("driverID");
     Navigator.pushReplacementNamed(context, IntroScreen.routeName);
   }
 
@@ -57,7 +64,9 @@ class _WeDoDriverAppState extends State<WeDoDriverApp> {
         logoutPressed: () {
           _goToLogOut(context);
         },
-        loginAsCustomerPressed: () {},
+        loginAsCustomerPressed: () {
+          Navigator.pushReplacementNamed(context, WeDoCustomerApp.routeName);
+        },
       ),
     );
   }

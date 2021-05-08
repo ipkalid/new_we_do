@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_do/components/buttons/setting_button.dart';
+import 'package:we_do/helper/hive_preferences.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/driver_login_screen.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/wallet_screen.dart';
 
@@ -76,14 +77,19 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void _goToDriverLoginScreen(BuildContext context) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DriverLoginScreen(
-            loginAsDriverPressed: widget.loginAsDriverPressed),
-        fullscreenDialog: true,
-      ),
-    );
+    print(globalDriverId);
+    if (globalDriverId != null) {
+      widget.loginAsDriverPressed();
+    } else {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DriverLoginScreen(
+              loginAsDriverPressed: widget.loginAsDriverPressed),
+          fullscreenDialog: true,
+        ),
+      );
+    }
   }
 
   void _onLogout(BuildContext context) async {

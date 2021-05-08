@@ -78,6 +78,23 @@ class Request {
     return allOffers;
   }
 
+  static Future<List<Request>> getAllGeneralRequests(int constant) async {
+    // if constant = 0 it means this is the first call
+    // if constant >=1 it means the number of loading times.
+    NetworkHelper backend = NetworkHelper(
+        url: Uri(path: "/api/requests"),
+        query: "limit=25&page=$constant&isSpecific=0&status=wating");
+    // TODO: there is problem from the backend with this header:
+    Map<String, String> header = {"embed": "customer, address"};
+    var response = await backend.getData(header);
+    List<Request> allRequests = [];
+    var aRequest;
+    for (aRequest in response) {
+      allRequests.add(Request.fromJson(aRequest));
+    }
+    return allRequests;
+  }
+
   // UC16 - COMPLETE
   static Future<String> createSpecificRequest(
       {@required String offerID,

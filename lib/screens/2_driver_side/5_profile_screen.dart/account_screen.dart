@@ -51,7 +51,7 @@ class _AccountScreenState extends State<AccountScreen> {
             onPressed: () => "onPressed",
           ),
           SettingButton(
-            label: "Log in as Driver",
+            label: "Log in as Customer",
             icon: Icons.directions_car_outlined,
             onPressed: () => widget.loginAsDriverPressed,
           ),

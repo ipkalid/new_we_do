@@ -23,14 +23,19 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
     currentUser.delete("customerID");
     currentUser.delete("phoneNumber");
     currentUser.delete("walletID");
+    currentUser.delete("driverID");
     Navigator.pushReplacementNamed(context, IntroScreen.routeName);
   }
 
   void _goToDriverSide(BuildContext context) async {
     print(globalKfupmMail);
 
-    Customer.activateDriverSide(globalKfupmMail);
-    //Navigator.pushReplacementNamed(context, WeDoDriverApp.routeName);
+    if (globalDriverId == null) {
+      Customer.activateDriverSide(globalKfupmMail);
+      Navigator.pushReplacementNamed(context, WeDoDriverApp.routeName);
+    } else {
+      Navigator.pushReplacementNamed(context, WeDoDriverApp.routeName);
+    }
   }
 
   String _currentPage = "Offer";
@@ -41,16 +46,6 @@ class _WeDoCustomerAppState extends State<WeDoCustomerApp> {
     "History": GlobalKey<NavigatorState>(),
     "Account": GlobalKey<NavigatorState>(),
   };
-
-  // void _onItemTapped(String tabItem, int index) {
-  //   if (tabItem == _currentPage) {
-  //     _navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
-  //   } else {
-  //     setState(() {
-  //       _currentPage = pageKeys[index];
-  //     });
-  //   }
-  // }
 
   void _onItemTapped(String tabItem, int index) {
     if (tabItem == _currentPage) {

@@ -13,6 +13,14 @@ void main() async {
   Box currentUser = await Hive.openBox<String>("currentUser");
 
   globalUserId = currentUser.get("customerID");
+  globalDriverId = currentUser.get("driverID");
+  globalPhoneNumber = currentUser.get("phoneNumber");
+  globalWalletId = currentUser.get("walletID");
+
+  print("globalUserId: $globalUserId");
+  print("globalDriverId: $globalDriverId");
+  print("globalPhoneNumber: $globalPhoneNumber");
+  print("globalWalletId: $globalWalletId");
 
   (globalUserId == null)
       ? globalRoute = IntroScreen.routeName

@@ -14,7 +14,7 @@ class TabNavigatorDriverSide extends StatelessWidget {
     this.tabItem,
     @required this.logoutPressed,
     @required this.loginAsCustomerPressed,
-    Null Function() loginAsDriverPressed,
+    //Null Function() loginAsDriverPressed,
   });
 
   @override
