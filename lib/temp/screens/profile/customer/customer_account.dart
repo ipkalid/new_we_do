@@ -6,6 +6,7 @@ import '../../../components/button_with_icon.dart';
 import '../../../components/wedo_appbar.dart';
 import 'edit_profile.dart';
 import 'wallet.dart';
+import 'package:we_do/helper/hive_preferences.dart';
 //import 'login.dart';
 
 class CustomerAccount extends StatefulWidget {
@@ -18,9 +19,8 @@ class _CustomerAccountState extends State<CustomerAccount> {
 
   Customer local;
   getCustomer() async{
-    Box<String> currentUser;
-    currentUser = Hive.box<String>("currentUser");
-    String phoneNumber = currentUser.get("phoneNumber");
+
+    String phoneNumber = globalPhoneNumber;
     local = await Customer.signIn(phoneNumber);
   }
 
