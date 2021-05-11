@@ -21,7 +21,8 @@ class Driver {
       {this.driverID,
       this.kfupmEmail,
       this.status,
-      this.rating,});
+      this.rating,
+      this.customer});
 
   Driver.fromJson(Map<String, dynamic> json) {
     if (json.containsKey("customerID"))

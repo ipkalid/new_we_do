@@ -80,7 +80,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                       return ListView(
                         shrinkWrap: true,
                         children: [
-                          Text("Error"),
+                          Text(snapshot.error.toString()),
                         ],
                       );
                     }
@@ -112,7 +112,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                       return ListView(
                         shrinkWrap: true,
                         children: [
-                          Text("Error"),
+                          Text(snapshot.error.toString()),
                         ],
                       );
                     }

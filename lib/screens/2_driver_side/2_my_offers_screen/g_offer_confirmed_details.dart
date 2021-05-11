@@ -115,7 +115,6 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                           }
                         });
                         changeAllServicesStatus(servicesList, "At The Store");
-
                       },
                       text: "At The Store",
                       buttonColor: Color(0xFFEFEFEF),
@@ -151,7 +150,7 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
   // TODO: FIX THE SERVICE PROBLEM
   void changeAllServicesStatus(List<Service> listOfServices, newStatus) {
     for (int i = 0; i < listOfServices.length; i++) {
-      Service.changeStatus(listOfServices[i].serviceID , newStatus);
+      Service.changeStatus(listOfServices[i].serviceID, newStatus);
     }
   }
 
@@ -239,19 +238,18 @@ class _GOfferConfirmedDetailsState extends State<GOfferConfirmedDetails> {
                             builder: (BuildContext context) =>
                                 _buildPopupDialog(context),
                           );
-                          
                         },
                         text: "Change Status",
                         buttonColor: mainOrange,
                       ),
                     ),
+                    SizedBox(
+                      height: 50,
+                    )
                   ],
                 ),
               ),
             ),
-            SizedBox(
-              height: 50,
-            )
           ],
         ),
       ),

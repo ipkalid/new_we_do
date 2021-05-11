@@ -3,7 +3,7 @@ import 'package:we_do/screens/1_customer_side/1_offer_screens/offer_screen.dart'
 import 'package:we_do/screens/1_customer_side/2_my_requests_screen/my_requests_screen.dart';
 import 'package:we_do/screens/1_customer_side/4_history_screens/history_screen.dart';
 import 'package:we_do/screens/1_customer_side/5_profile_screen/account_screen.dart';
-
+import 'package:we_do/temp/screens/history/customer/historyCustomer.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -35,7 +35,7 @@ class TabNavigator extends StatelessWidget {
         break;
 
       case "History":
-        child = HistoryScreen();
+        child = CustomerHistory();
         break;
 
       case "Account":
